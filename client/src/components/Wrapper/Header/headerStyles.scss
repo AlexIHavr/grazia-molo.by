@@ -1,0 +1,36 @@
+@import '/src/globalStyles';
+
+header {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: $headerHeight;
+  z-index: 1;
+  background-color: $backgroundColor;
+  .VkLink {
+    display: none;
+  }
+}
+
+.FixedHeader {
+  height: $headerHeight;
+}
+
+@media (max-width: $adaptiveWidth1) {
+  header {
+    flex-direction: column;
+    height: $headerHeight1;
+    position: static;
+  }
+  .FixedHeader {
+    display: none;
+  }
+}
+
+@media (max-width: $adaptiveWidth2) {
+  header {
+    height: fit-content;
+  }
+}

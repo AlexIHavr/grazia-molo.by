@@ -1,0 +1,166 @@
+@import '/src/globalStyles';
+
+.window {
+  $windowWidth: 50%;
+
+  position: fixed;
+  left: (100% - $windowWidth) / 2;
+  top: 40px;
+  width: $windowWidth;
+  min-width: 280px;
+  padding: 20px;
+  box-shadow: 0 0 5px $activeColor;
+  background-color: $backgroundColor;
+  color: $baseTextColor;
+  font-weight: bold;
+  text-align: center;
+  z-index: 4;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+
+  h1 {
+    margin: 0 auto 20px auto;
+    width: 70%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 1.3rem;
+    }
+    i {
+      width: 28px;
+      font-size: 2rem;
+    }
+    .InputContainer {
+      $inputWidth: 70%;
+      display: flex;
+      align-items: center;
+      margin-left: (100% - $inputWidth) / 2;
+
+      input,
+      .Select {
+        margin: 10px;
+        width: $inputWidth;
+      }
+
+      .PasswordEye {
+        cursor: pointer;
+        i {
+          font-size: 1.7rem;
+        }
+      }
+    }
+    .IsClubContainer {
+      margin-top: 10px;
+      cursor: pointer;
+      text-shadow: 0 0 2px black;
+      i.fa-user-check {
+        color: green;
+      }
+      i.fa-user-times {
+        color: red;
+      }
+    }
+  }
+
+  .ThanksText {
+    display: none;
+    margin-bottom: 0;
+  }
+}
+
+.activateWindow {
+  transform: scale(1) !important;
+  -webkit-transform: scale(1) !important;
+  -moz-transform: scale(1) !important;
+  -ms-transform: scale(1) !important;
+  -o-transform: scale(1) !important;
+
+  transition: transform 0.3s;
+  -webkit-transition: transform 0.3s;
+  -moz-transition: transform 0.3s;
+  -ms-transition: transform 0.3s;
+  -o-transition: transform 0.3s;
+}
+
+@media (max-width: $adaptiveWidth1) {
+  .window {
+    $windowWidth: 60%;
+    left: (100% - $windowWidth) / 2;
+    width: $windowWidth;
+
+    form .InputContainer {
+      $inputWidth: 80%;
+      margin-left: (100% - $inputWidth) / 2;
+      input,
+      .Select {
+        width: $inputWidth;
+      }
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth2) {
+  .window {
+    $windowWidth: 70%;
+    left: (100% - $windowWidth) / 2;
+    width: $windowWidth;
+    .PasswordEye {
+      position: absolute;
+      right: 10px;
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth3) {
+  .window {
+    top: 10px;
+    $windowWidth: 80%;
+    left: (100% - $windowWidth) / 2;
+    width: $windowWidth;
+    padding: 10px;
+    form .InputContainer {
+      $inputWidth: 90%;
+      margin-left: (100% - $inputWidth) / 2;
+
+      input[name='password'] {
+        padding-right: 50px;
+      }
+
+      input,
+      .Select {
+        width: $inputWidth;
+      }
+      .PasswordEye {
+        right: 35px;
+      }
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth4) {
+  .window {
+    $windowWidth: 90%;
+    left: (100% - $windowWidth) / 2;
+    width: $windowWidth;
+    form .InputContainer {
+      $inputWidth: 100%;
+      margin-left: (100% - $inputWidth) / 2;
+      input,
+      .Select {
+        width: $inputWidth;
+      }
+    }
+  }
+}

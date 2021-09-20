@@ -1,0 +1,67 @@
+@import '/src/globalStyles';
+
+.MainButtons {
+  display: flex;
+  justify-content: center;
+  & > * {
+    height: 50px;
+  }
+  .OnlineButton {
+    display: none;
+    position: absolute;
+    left: 10px;
+  }
+  .LoginButton {
+    margin: 0 20px;
+  }
+  .IconUser {
+    display: none;
+    position: relative;
+    bottom: 23px;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin-top: 15px;
+    span {
+      max-width: 200px;
+      text-align: center;
+      color: $activeColor;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 5px;
+      border-bottom: 2px solid $baseBorderColor;
+      border-radius: 5px !important;
+      -webkit-border-radius: 5px !important;
+      -moz-border-radius: 5px !important;
+      -ms-border-radius: 5px !important;
+      -o-border-radius: 5px !important;
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth1) {
+  .MainButtons {
+    width: 100%;
+
+    .IconUser {
+      span {
+        max-width: 400px;
+      }
+    }
+    .OnlineButton {
+      display: block;
+    }
+    .LoginButton {
+      margin: 0 20px 0 0;
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth3) {
+  .MainButtons {
+    .OnlineButton {
+      top: 20px;
+      padding: 10px 15px;
+    }
+  }
+}

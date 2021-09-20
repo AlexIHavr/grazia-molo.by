@@ -1,0 +1,15 @@
+{
+  "CLIENT_URL": "http://grazia-molo.by",
+  "API_URL": "http://grazia-molo.by",
+  "PORT": 80,
+  "DB_URL": "mongodb+srv://alex69:pascalabc@cluster0.tjo5g.mongodb.net/app?retryWrites=true&w=majority",
+  "SMTP_HOST": "smtp.mail.ru",
+  "SMTP_PORT": 465,
+  "SMTP_USER": "dchavronin@bk.ru",
+  "SMTP_PASSWORD": "pascalabc",
+  "JWT_ACCESS_SECRET": "pascalabc-access",
+  "JWT_REFRESH_SECRET": "pascalabc-refresh",
+  "TIME_JWT_ACCESS": "30m",
+  "TIME_JWT_REFRESH": "30d",
+  "IMAGES_URL": "./build/Images/Wrapper/Main/Forum"
+}

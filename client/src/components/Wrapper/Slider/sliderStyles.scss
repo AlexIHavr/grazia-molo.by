@@ -1,0 +1,151 @@
+@import '/src/globalStyles';
+
+.activeNavSlider {
+  background-color: $baseTextColor;
+}
+
+.deactivatedImg {
+  opacity: 0 !important;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+  -moz-transition: opacity 2s;
+  -ms-transition: opacity 2s;
+  -o-transition: opacity 2s;
+}
+.activatedImg {
+  opacity: 1 !important;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+  -moz-transition: opacity 2s;
+  -ms-transition: opacity 2s;
+  -o-transition: opacity 2s;
+}
+
+.Slider {
+  position: relative;
+  display: grid;
+  row-gap: 10px;
+  grid-template-columns: 4fr 5fr 4fr;
+  text-align: center;
+  box-shadow: 0px 1px 5px $activeColor;
+
+  .OnlineButton {
+    position: absolute;
+    top: 40%;
+    left: 50px;
+    animation: moveOnlineButton 2s infinite ease-in-out alternate;
+    -webkit-animation: moveOnlineButton 2s infinite ease-in-out alternate;
+  }
+
+  i {
+    font-size: 2rem;
+    @extend .activeI;
+  }
+
+  .MoveSliderLeft {
+    justify-self: right;
+    align-self: center;
+  }
+
+  .MoveSliderRight {
+    justify-self: left;
+    align-self: center;
+  }
+
+  .MainSlider {
+    $sliderHeight: 350px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $sliderHeight;
+
+    img {
+      position: absolute;
+      width: 450px;
+      max-height: $sliderHeight;
+      box-shadow: 0px 1px 5px $activeColor;
+
+      &:not(:first-child) {
+        opacity: 0;
+      }
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      -ms-border-radius: 50px;
+      -o-border-radius: 50px;
+    }
+  }
+
+  .NavSlider {
+    display: flex;
+    justify-content: center;
+    grid-column: 2;
+
+    div {
+      margin: 5px;
+      width: 15px;
+      height: 15px;
+      border: 2px solid $baseTextColor;
+      cursor: pointer;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+
+      &:hover {
+        @extend .activeNavSlider;
+      }
+
+      transition: background-color 0.1s;
+      -webkit-transition: background-color 0.1s;
+      -moz-transition: background-color 0.1s;
+      -ms-transition: background-color 0.1s;
+      -o-transition: background-color 0.1s;
+    }
+  }
+}
+
+@keyframes moveOnlineButton {
+  from {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+  }
+}
+
+@media (max-width: $adaptiveWidth1) {
+  .Slider {
+    grid-template-columns: 3fr 5fr 3fr;
+
+    .OnlineButton {
+      font-size: 1rem;
+      left: 25px;
+      top: 37%;
+    }
+    .MainSlider {
+      $sliderHeight: 250px;
+      height: $sliderHeight;
+      img {
+        width: 350px;
+        max-height: $sliderHeight;
+      }
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth1) {
+  .Slider {
+    display: none;
+  }
+}

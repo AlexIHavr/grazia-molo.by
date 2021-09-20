@@ -1,0 +1,46 @@
+$baseTextColor: #072f56;
+$activeColor: #0004ff;
+$baseBorderColor: #000597;
+$backgroundColor: #d5edff;
+$buttonColor: #98edff;
+
+//адаптив
+$adaptiveWidth1: 1250px;
+$adaptiveWidth2: 850px;
+$adaptiveWidth3: 535px;
+$adaptiveWidth4: 365px;
+
+//адаптивные высоты header
+$headerHeight: 110px;
+$headerHeight1: 250px;
+
+.active:not(.GoToAdminPanel) {
+  $borderMenu: 2px solid $baseBorderColor !important;
+  border-bottom: $borderMenu;
+  border-top: $borderMenu;
+  color: $activeColor !important;
+  border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
+  $transitionTime: 0.2s;
+  transition: color $transitionTime, border-color $transitionTime;
+  -webkit-transition: color $transitionTime, border-color $transitionTime;
+  -moz-transition: color $transitionTime, border-color $transitionTime;
+  -ms-transition: color $transitionTime, border-color $transitionTime;
+  -o-transition: color $transitionTime, border-color $transitionTime;
+}
+
+.activeI {
+  cursor: pointer;
+
+  &:hover {
+    text-shadow: 0px 0px 3px #02aaf8;
+  }
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
+}

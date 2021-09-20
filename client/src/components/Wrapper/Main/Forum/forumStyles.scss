@@ -1,0 +1,239 @@
+@import '/src/globalStyles';
+
+.Post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto 40px auto;
+
+  & > * {
+    background-color: $backgroundColor;
+    box-shadow: 0px 1px 5px $activeColor;
+    padding: 15px;
+  }
+}
+
+.PostContent {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border-radius: 30px 30px;
+  -webkit-border-radius: 30px 30px;
+  -moz-border-radius: 30px 30px;
+  -ms-border-radius: 30px 30px;
+  -o-border-radius: 30px 30px;
+  .PostName {
+    position: relative;
+    max-width: 50%;
+    top: -15px;
+    display: inline-block;
+    margin-bottom: 0;
+    color: $activeColor;
+    box-shadow: 1px 1px 5px $activeColor;
+    padding: 10px;
+    background-color: $buttonColor;
+    border-radius: 0 0 15px 15px;
+    -webkit-border-radius: 0 0 15px 15px;
+    -moz-border-radius: 0 0 15px 15px;
+    -ms-border-radius: 0 0 15px 15px;
+    -o-border-radius: 0 0 15px 15px;
+  }
+
+  .PostDate {
+    width: 25%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 30px 0 10px 0;
+    padding: 10px;
+    font-weight: bold;
+    color: $activeColor;
+    box-shadow: 1px 1px 5px $activeColor;
+    background-color: $buttonColor;
+  }
+
+  .PostImg {
+    img {
+      height: 150px;
+    }
+  }
+
+  .PostViews {
+    position: relative;
+    top: 10px;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: bold;
+    .PostCountViews {
+      margin-left: 5px;
+    }
+  }
+
+  .PostDescription {
+    font-weight: bold;
+  }
+
+  .PostButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    button {
+      margin: 10px;
+    }
+  }
+}
+.CreateComment {
+  overflow-y: hidden;
+  width: 80%;
+  form {
+    text-align: center;
+    textarea {
+      width: 100%;
+      height: 100px;
+    }
+    button {
+      margin: 10px 0;
+    }
+  }
+  .ThanksComment {
+    text-align: center;
+    display: none;
+  }
+}
+
+.PostComments,
+.CreateComment {
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+
+  max-height: 0;
+  padding: 0;
+  border-radius: 0 0 15px 15px;
+  -webkit-border-radius: 0 0 15px 15px;
+  -moz-border-radius: 0 0 15px 15px;
+  -ms-border-radius: 0 0 15px 15px;
+  -o-border-radius: 0 0 15px 15px;
+}
+
+.PostComments {
+  width: 90%;
+  overflow-y: auto;
+  .PostInfoUser {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    .UserNameComment {
+      text-indent: 50px;
+      font-size: 1.2rem;
+      flex-grow: 1;
+    }
+  }
+  .UserComment {
+    text-indent: 50px;
+    margin-bottom: 10px;
+  }
+}
+
+.OpenComments,
+.OpenCreateComment {
+  max-height: 300px !important;
+  padding: 15px !important;
+  transition: max-height 0.2s;
+  -webkit-transition: max-height 0.2s;
+  -moz-transition: max-height 0.2s;
+  -ms-transition: max-height 0.2s;
+  -o-transition: max-height 0.2s;
+}
+
+.zoomInPostPhoto {
+  position: relative;
+  top: 40px;
+  left: 40px;
+  transition: transform 0.1s !important;
+  -webkit-transition: transform 0.1s !important;
+  -moz-transition: transform 0.1s !important;
+  -ms-transition: transform 0.1s !important;
+  -o-transition: transform 0.1s !important;
+}
+
+@media (max-width: $adaptiveWidth1) {
+  .Post {
+    width: 90%;
+  }
+}
+
+@media (max-width: $adaptiveWidth3) {
+  .Post {
+    width: 100%;
+
+    & > * {
+      padding: 0;
+    }
+
+    .CreateComment {
+      width: 75%;
+    }
+    .PostContent {
+      .PostDate {
+        position: relative;
+        top: 6.5px;
+        width: fit-content;
+        border-radius: 0 0 15px 15px;
+        -webkit-border-radius: 0 0 15px 15px;
+        -moz-border-radius: 0 0 15px 15px;
+        -ms-border-radius: 0 0 15px 15px;
+        -o-border-radius: 0 0 15px 15px;
+      }
+      .PostName {
+        position: static;
+        max-width: 100%;
+        width: 100%;
+        right: 0;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        border-radius: 30px 30px 0 0;
+        -webkit-border-radius: 30px 30px 0 0;
+        -moz-border-radius: 30px 30px 0 0;
+        -ms-border-radius: 30px 30px 0 0;
+        -o-border-radius: 30px 30px 0 0;
+      }
+      .PostViews {
+        left: 10px;
+      }
+      .PostImg {
+        margin-top: 50px;
+      }
+    }
+  }
+
+  .PostComments {
+    width: 85%;
+    .PostInfoUser {
+      flex-direction: column;
+
+      .UserNameComment {
+        text-indent: 0;
+      }
+
+      .UserPhoto {
+        position: static;
+      }
+    }
+    .UserComment {
+      text-indent: 20px;
+    }
+  }
+
+  .zoomInPostPhoto {
+    top: 0;
+    left: 0;
+  }
+}
