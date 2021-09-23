@@ -45,7 +45,7 @@ const validationMiddleware = (fields: string[]) => {
         stackFields.push(() =>
           body(field)
             .trim()
-            .matches(/^[А-Я]+\s[А-Я]+$/i)
+            .matches(/^[А-ЯёЁ]+\s[А-ЯёЁ]+$/i)
             .withMessage(
               'Полное имя указано некорректно. Полное имя указывается в формате: "Фамилия Имя"'
             )
