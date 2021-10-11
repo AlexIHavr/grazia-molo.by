@@ -12,6 +12,7 @@ class MainReducer {
 
   state: mainType = {
     documentElem: document.documentElement,
+    activateIMoveUpDocument: false,
     activateIMoveUp: false,
     activateIMoveDown: false,
     activateMainMenu: false,
@@ -81,6 +82,12 @@ class MainReducer {
     }
   }
 
+  //изменить показ стрелки перемещение вверх контента
+  toogleIMoveUpDocumentOnScroll() {
+    this.state.activateIMoveUpDocument =
+      this.state.refNavContent.current.getBoundingClientRect().y < 0;
+  }
+
   //активация стрелок перемещение навигации контента
   activateNavContentScrollArrows(refContent: React.MutableRefObject<HTMLDivElement>) {
     if (window.innerWidth > this.state.settings.adaptiveWidth2) {
@@ -96,7 +103,7 @@ class MainReducer {
 
   //перемещение на границы навигации контента при нажатии на стрелки
   scrollNavContentToDirection(direction: 'Up' | 'Down' | 'WithContent') {
-    const navContent = this.state.refNavContent.current;
+    const navContent = this.state.refContent.current;
 
     switch (direction) {
       case 'Up':
@@ -121,6 +128,11 @@ class MainReducer {
         }
         break;
     }
+  }
+
+  //перемещение контента вверх (при небольших экранах)
+  scrollDocumentToUp() {
+    window.scrollTo(0, 0);
   }
 
   //получение простой навигации контента безссылочных разделов

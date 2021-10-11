@@ -51,6 +51,8 @@ const Main: React.FC = () => {
       if (window.innerWidth > state.settings.adaptiveWidth2) {
         mainReducer.selectedOnScrollWindow(refContent);
         mainReducer.fixedNavOnScroll();
+      } else {
+        mainReducer.toogleIMoveUpDocumentOnScroll();
       }
     });
 
@@ -63,13 +65,20 @@ const Main: React.FC = () => {
   return (
     <main>
       <i
-        style={state.activateIMoveUp ? { display: 'block' } : { display: 'none' }}
-        className="fas fa-arrow-circle-up MoveUp"
+        className={
+          'fas fa-arrow-circle-up MoveUpDocument' +
+          (state.activateIMoveUpDocument ? ' openElement' : '')
+        }
+        onClick={() => mainReducer.scrollDocumentToUp()}
+      ></i>
+      <i
+        className={'fas fa-arrow-circle-up MoveUp' + (state.activateIMoveUp ? ' openElement' : '')}
         onClick={() => mainReducer.scrollNavContentToDirection('Up')}
       ></i>
       <i
-        style={state.activateIMoveDown ? { display: 'block' } : { display: 'none' }}
-        className="fas fa-arrow-circle-down MoveDown"
+        className={
+          'fas fa-arrow-circle-down MoveDown' + (state.activateIMoveDown ? ' openElement' : '')
+        }
         onClick={() => mainReducer.scrollNavContentToDirection('Down')}
       ></i>
 

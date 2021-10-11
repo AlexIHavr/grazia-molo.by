@@ -10,6 +10,7 @@ type settingsType = {
 
 export type mainType = {
   documentElem: HTMLElement;
+  activateIMoveUpDocument: boolean;
   activateIMoveUp: boolean;
   activateIMoveDown: boolean;
   activateMainMenu: boolean;

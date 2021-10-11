@@ -119,6 +119,18 @@ main {
   i.MoveDown {
     bottom: 100px;
   }
+
+  i.MoveUpDocument {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    font-size: 2.5rem;
+    opacity: 0.9;
+    color: #65edff;
+    text-shadow: 0 0 5px black;
+    z-index: 1;
+  }
 }
 
 .NavContent.MainPage {
