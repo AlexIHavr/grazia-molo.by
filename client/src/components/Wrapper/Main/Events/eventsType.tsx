@@ -4,15 +4,16 @@ export type video = {
 };
 
 export type yearsEvent = {
-  year: string;
+  event: string;
+  eventName: string;
   description: string[];
   images?: string[];
   videos?: video[];
 };
 
 export type eventType = {
-  event: string;
-  eventName: string;
+  year: string;
+  yearDiscription: string;
   yearsEvent: yearsEvent[];
 };
 

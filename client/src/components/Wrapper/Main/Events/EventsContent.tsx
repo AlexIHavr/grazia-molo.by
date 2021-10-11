@@ -8,28 +8,26 @@ import mainReducer from '../mainReducer';
 const EventsContent: React.FC = () => {
   const state = eventsReducer.state;
 
-  const { event, year } = useParams<{ event: string; year: string }>();
-
-  const getContentYears = () => {
-    const yearEvent = state.events
-      .find((e) => e.event === event)
-      .yearsEvent.find((yearEvent) => yearEvent.year === year);
-
-    return mainReducer.getSimpleContent([yearEvent], 'year', state.imagesUrl + event + '/');
-  };
+  const { year, event } = useParams<{ year: string; event: string }>();
 
   const getContentEvents = () => {
+    const yearEvent = state.events
+      .find((e) => e.year === year)
+      .yearsEvent.find((yearEvent) => yearEvent.event === event);
+
+    return mainReducer.getSimpleContent([yearEvent], 'event', state.imagesUrl + year + '/');
+  };
+
+  const getContentYears = () => {
     return (
       <>
-        {year !== undefined ? (
-          getContentYears()
+        {event !== undefined ? (
+          getContentEvents()
         ) : (
-          <div className="Description">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam, maxime quod quos
-            iusto laboriosam eius numquam. Adipisci officia a reprehenderit eaque quam. Error
-            accusamus quam, rerum odit quia suscipit possimus nihil dolorum numquam quaerat quisquam
-            atque. Tempore minima nisi animi quasi aliquam nobis modi quas enim soluta labore. Non,
-            perferendis.
+          <div>
+            <div className="Description">
+              {state.events.find((e) => e.year === year).yearDiscription}
+            </div>
           </div>
         )}
       </>
@@ -38,8 +36,8 @@ const EventsContent: React.FC = () => {
 
   return (
     <>
-      {event !== undefined ? (
-        getContentEvents()
+      {year !== undefined ? (
+        getContentYears()
       ) : (
         <div className="Description">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. A dolores, aliquid non,

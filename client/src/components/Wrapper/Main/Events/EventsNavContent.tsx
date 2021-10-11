@@ -11,36 +11,36 @@ import './eventsStyles.scss';
 const EventsNavContent: React.FC = () => {
   const state = eventsReducer.state;
 
-  const { event } = useParams<{ event: string }>();
+  const { year } = useParams<{ year: string }>();
 
-  const getNavYears = (e: eventType) => {
-    if (e.event === event) {
+  const getNavEvents = (e: eventType) => {
+    if (e.year === year) {
       return e.yearsEvent.map((yearEvent) => {
         return (
           <NavLink
-            key={yearEvent.year + e.event}
+            key={yearEvent.event + e.year}
             className="YearsEvents"
-            to={'/Events/' + e.event + '/' + yearEvent.year}
+            to={'/Events/' + e.year + '/' + yearEvent.event}
           >
-            {yearEvent.year}
+            {yearEvent.eventName}
           </NavLink>
         );
       });
     }
   };
 
-  const getNavEvents = () => {
+  const getNavYears = () => {
     return state.events.map((e) => {
       return (
-        <Fragment key={e.event}>
-          <NavLink to={'/Events/' + e.event}>{e.eventName}</NavLink>
-          {getNavYears(e)}
+        <Fragment key={e.year}>
+          <NavLink to={'/Events/' + e.year}>{e.year}</NavLink>
+          {getNavEvents(e)}
         </Fragment>
       );
     });
   };
 
-  return <>{getNavEvents()}</>;
+  return <>{getNavYears()}</>;
 };
 
 export default observer(EventsNavContent);

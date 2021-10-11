@@ -21,8 +21,7 @@ class MainReducer {
     refContent: null,
     refNavContent: null,
     iSelectedItem: 0,
-    currentPage:
-      window.location.href.split('/')[window.location.href.split('/').length - 1] || 'MainPage',
+    currentPage: window.location.href.split('/')[3] || 'MainPage',
     settings: {
       offsetNavScroll: 250, //смещение навигации при появление ее прокрутки (стрелок)
       addOffsetContentScroll: 10, //дополнительный отступ контента при активации навигации

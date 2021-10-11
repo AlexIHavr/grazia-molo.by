@@ -96,7 +96,7 @@ const Main: React.FC = () => {
           <Route path="/" component={MainPageNavContent} exact />
           <Route path="/Dances" component={DancesNavContent} exact />
           <Route path="/Timetable" component={TimetableNavContent} exact />
-          <Route path="/Events/:event?/:year?" component={EventsNavContent} exact />
+          <Route path="/Events/:year?/:event?" component={EventsNavContent} exact />
           <Route path="/Creativity/:creation?" component={CreativityNavContent} exact />
           <Route path="/History" component={HistoryNavContent} exact />
           <Route path="/Forum" component={ForumNavContent} exact />
@@ -116,7 +116,7 @@ const Main: React.FC = () => {
           <Route path="/" component={MainPageContent} exact />
           <Route path="/Dances" component={DancesContent} exact />
           <Route path="/Timetable" component={TimetableContent} exact />
-          <Route path="/Events/:event?/:year?" component={EventsContent} exact />
+          <Route path="/Events/:year?/:event?" component={EventsContent} exact />
           <Route path="/Creativity/:creation?" component={CreativityContent} exact />
           <Route path="/History" component={HistoryContent} exact />
           <Route path="/Forum" component={ForumContent} exact />
