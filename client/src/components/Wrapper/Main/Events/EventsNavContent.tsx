@@ -17,11 +17,7 @@ const EventsNavContent: React.FC = () => {
     if (e.year === year) {
       return e.yearsEvent.map((yearEvent) => {
         return (
-          <NavLink
-            key={yearEvent.event + e.year}
-            className="YearsEvents"
-            to={'/Events/' + e.year + '/' + yearEvent.event}
-          >
+          <NavLink key={yearEvent.event + e.year} to={'/Events/' + e.year + '/' + yearEvent.event}>
             {yearEvent.eventName}
           </NavLink>
         );
@@ -33,7 +29,9 @@ const EventsNavContent: React.FC = () => {
     return state.events.map((e) => {
       return (
         <Fragment key={e.year}>
-          <NavLink to={'/Events/' + e.year}>{e.year}</NavLink>
+          <NavLink className="YearsEvents" to={'/Events/' + e.year}>
+            {e.year}
+          </NavLink>
           {getNavEvents(e)}
         </Fragment>
       );
