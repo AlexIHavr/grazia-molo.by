@@ -11,5 +11,5 @@
   "JWT_REFRESH_SECRET": "pascalabc-refresh",
   "TIME_JWT_ACCESS": "30m",
   "TIME_JWT_REFRESH": "30d",
-  "IMAGES_URL": "../client/public/Images/Wrapper/Main/Forum"
+  "IMAGES_URL": "../client/public/Images/Wrapper/Main/"
 }

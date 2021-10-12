@@ -18,26 +18,10 @@ const EventsContent: React.FC = () => {
     return mainReducer.getSimpleContent([yearEvent], 'event', state.imagesUrl + year + '/');
   };
 
-  const getContentYears = () => {
-    return (
-      <>
-        {event !== undefined ? (
-          getContentEvents()
-        ) : (
-          <div>
-            <div className="Description">
-              {state.events.find((e) => e.year === year).yearDiscription}
-            </div>
-          </div>
-        )}
-      </>
-    );
-  };
-
   return (
     <>
-      {year !== undefined ? (
-        getContentYears()
+      {year !== undefined && event !== undefined ? (
+        getContentEvents()
       ) : (
         <div className="Description">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. A dolores, aliquid non,

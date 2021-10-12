@@ -11,7 +11,6 @@ class EventsReducer {
     events: [
       {
         year: '2012',
-        yearDiscription: '',
         yearsEvent: [
           {
             eventName: 'Юбилей Грации - 20 лет',

@@ -4,6 +4,7 @@ import userController from '../controllers/userController';
 import timetableController from '../controllers/timetableController';
 import multerMiddleware from '../middlewares/multerMiddleware';
 import validationMiddleware from '../middlewares/validationMiddleware';
+import eventController from '../controllers/eventController';
 
 const adminRouter: Router = Router();
 
@@ -12,14 +13,20 @@ adminRouter.get('/getUsers', userController.getUsers);
 
 adminRouter.post(
   '/createPost',
-  multerMiddleware('Posts', 'photo'),
+  multerMiddleware('Forum/Posts'),
   validationMiddleware(['name']),
   postController.createPost
+);
+adminRouter.post(
+  '/createEvent',
+  multerMiddleware('Events', 'year'),
+  validationMiddleware(['year', 'name']),
+  eventController.createEvent
 );
 
 adminRouter.put(
   '/changePost',
-  multerMiddleware('Posts', 'photo'),
+  multerMiddleware('Forum/Posts'),
   validationMiddleware(['name']),
   postController.changePost
 );

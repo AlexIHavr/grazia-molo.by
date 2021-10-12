@@ -8,6 +8,11 @@ class FileService {
       fs.unlinkSync(path.join(__dirname, `../${config.get('IMAGES_URL')}`, `${dir}/${photoName}`));
     }
   }
+  mkdirForPhotos(dir: string) {
+    if (!fs.existsSync(`${config.get('IMAGES_URL')}/${dir}`)) {
+      fs.mkdirSync(`${config.get('IMAGES_URL')}/${dir}`);
+    }
+  }
 }
 
 export default new FileService();

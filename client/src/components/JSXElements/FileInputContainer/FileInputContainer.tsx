@@ -6,12 +6,20 @@ interface IProps {
   id: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onDelete?: React.MouseEventHandler<HTMLInputElement>;
+  multiple?: boolean;
 }
 
-const FileInputContainer: React.FC<IProps> = ({ id, onChange, onDelete }) => {
+const FileInputContainer: React.FC<IProps> = ({ id, onChange, onDelete, multiple }) => {
   return (
     <div className="FileInputContainer">
-      <input id={id} type="file" accept=".jpg,.jpeg,.png" name="photo" onChange={onChange} />
+      <input
+        id={id}
+        type="file"
+        accept=".jpg,.jpeg,.png"
+        name="photo"
+        onChange={onChange}
+        multiple={multiple}
+      />
       <label htmlFor={id}>
         <div className="UploadInput button">
           <i className="fas fa-upload"></i>

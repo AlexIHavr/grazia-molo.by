@@ -43,6 +43,12 @@ class AdminPanelReducer {
         errorMessage: '',
         successMessage: '',
       },
+      {
+        panel: 'CreateEvent',
+        panelName: 'Создать событие',
+        errorMessage: '',
+        successMessage: '',
+      },
     ],
     posts: [],
     comments: [],
@@ -71,10 +77,11 @@ class AdminPanelReducer {
   //показать успех при загрузке в браузер фото
   uploadPostPhoto(e: React.ChangeEvent<HTMLInputElement>, selectedPanel: string) {
     if (e.currentTarget.files.length) {
-      this.showSuccessMessage(
-        `Фото ${e.currentTarget.files[0].name} успешно загружено`,
-        selectedPanel
-      );
+      const nameFiles = Array.from(e.currentTarget.files).reduce((message, file, i, arr) => {
+        return (message += file.name + (i !== arr.length - 1 ? ', ' : ''));
+      }, '');
+
+      this.showSuccessMessage(`Фото ${nameFiles} успешно загружены`, selectedPanel);
     } else {
       this.showSuccessMessage('', selectedPanel);
     }
@@ -257,6 +264,18 @@ class AdminPanelReducer {
       this.showSuccessMessage('Расписание сохранено', 'ManageTimetable');
     } catch (e) {
       this.showErrorMessage(e, 'ManageTimetable');
+    }
+  }
+
+  //создание события
+  async createEvent(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    try {
+      await adminApi.post('/createEvent', new FormData(e.currentTarget));
+      this.showSuccessMessage('Событие создано', 'CreateEvent');
+    } catch (e) {
+      this.showErrorMessage(e, 'CreateEvent');
     }
   }
 }

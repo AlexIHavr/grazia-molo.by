@@ -13,7 +13,6 @@ export type yearsEvent = {
 
 export type eventType = {
   year: string;
-  yearDiscription: string;
   yearsEvent: yearsEvent[];
 };
 

@@ -2,7 +2,6 @@ import { body } from 'express-validator';
 
 const validationMiddleware = (fields: string[]) => {
   const stackFields: Function[] = [];
-
   fields.forEach((field) => {
     switch (field) {
       case 'name':
@@ -64,7 +63,15 @@ const validationMiddleware = (fields: string[]) => {
         break;
       case 'email':
         stackFields.push(() =>
-          body(field).isEmail().withMessage('Почтовый адрес указан некорректно')
+          body(field).trim().isEmail().withMessage('Почтовый адрес указан некорректно')
+        );
+        break;
+      case 'year':
+        stackFields.push(() =>
+          body(field)
+            .trim()
+            .matches(/^[0-9]{4}$/)
+            .withMessage('Год указан некорректно')
         );
         break;
     }

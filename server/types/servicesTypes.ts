@@ -77,3 +77,12 @@ export type lessonsRequestType = {
     group: string;
   }[];
 };
+
+export type eventRequestType = {
+  year: string;
+  name: string;
+  description: string;
+  photoNames: string[];
+  videoNames: string;
+  videoLinks: string;
+};

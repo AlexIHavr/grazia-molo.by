@@ -3,15 +3,23 @@ import { NextFunction, Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import ApiError from '../errors/apiError';
+import fileService from '../services/fileService';
 
-const multerMiddleware = (baseDir: string, fileName: string) => {
+const multerMiddleware = (baseDir: string, addDir?: string) => {
   const multerSettings = multer({
     storage: multer.diskStorage({
       destination: (req, file, cb) => {
-        cb(null, `${config.get('IMAGES_URL')}/${baseDir}/`);
+        let dir = baseDir;
+        //создание доп. папки
+        if (addDir) {
+          dir = `${baseDir}/${req.body[addDir]}`;
+          fileService.mkdirForPhotos(dir);
+        }
+
+        cb(null, `${config.get('IMAGES_URL')}/${dir}/`);
       },
       filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, Math.random().toString(16).slice(2) + path.extname(file.originalname));
       },
     }),
     fileFilter: (req, file, cb) => {
@@ -23,7 +31,7 @@ const multerMiddleware = (baseDir: string, fileName: string) => {
       }
       cb(null, true);
     },
-  }).single(fileName);
+  }).array('photo');
 
   return (req: Request, res: Response, next: NextFunction) => {
     if (req.method === 'OPTIONS') {

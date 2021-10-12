@@ -18,7 +18,7 @@ userRouter.get('/getPosts', postController.getPosts);
 userRouter.put('/addPostViews', postController.addPostViews);
 userRouter.put(
   '/changeUserSettings',
-  multerMiddleware('Users', 'photo'),
+  multerMiddleware('Forum/Users'),
   validationMiddleware(['fullName']),
   userController.changeUserSettings
 );

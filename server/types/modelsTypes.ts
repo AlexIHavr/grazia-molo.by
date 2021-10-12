@@ -40,3 +40,12 @@ export type lessonModelType = {
   hours: number;
   group: string;
 } & Document;
+
+export type eventModelType = {
+  year: number;
+  name: string;
+  description: string;
+  photoNames: string[];
+  videoNames: string[];
+  videoLinks: string[];
+};

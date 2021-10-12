@@ -51,7 +51,9 @@ const Main: React.FC = () => {
       if (window.innerWidth > state.settings.adaptiveWidth2) {
         mainReducer.selectedOnScrollWindow(refContent);
         mainReducer.fixedNavOnScroll();
-      } else {
+      }
+
+      if (window.innerWidth < state.settings.adaptiveWidth1) {
         mainReducer.toogleIMoveUpDocumentOnScroll();
       }
     });

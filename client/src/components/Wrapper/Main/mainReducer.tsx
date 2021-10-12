@@ -84,7 +84,7 @@ class MainReducer {
   //изменить показ стрелки перемещение вверх контента
   toogleIMoveUpDocumentOnScroll() {
     this.state.activateIMoveUpDocument =
-      this.state.refNavContent.current.getBoundingClientRect().y < 0;
+      this.state.refContent.current.getBoundingClientRect().y < 0;
   }
 
   //активация стрелок перемещение навигации контента
