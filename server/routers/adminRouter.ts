@@ -10,6 +10,7 @@ const adminRouter: Router = Router();
 
 adminRouter.get('/getUnvalidatedComments', postController.getUnvalidatedComments);
 adminRouter.get('/getUsers', userController.getUsers);
+adminRouter.get('/getEvents', eventController.getEvents);
 
 adminRouter.post(
   '/createPost',

@@ -4,7 +4,7 @@ import { eventModelType } from './../types/modelsTypes';
 const eventModel = new Schema({
   year: { type: Number, require: true },
   name: { type: String, require: true },
-  description: { type: String },
+  description: [String],
   photoNames: [String],
   videoNames: [String],
   videoLinks: [String],

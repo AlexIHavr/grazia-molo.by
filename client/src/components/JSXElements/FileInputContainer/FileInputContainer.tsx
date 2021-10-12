@@ -15,7 +15,7 @@ const FileInputContainer: React.FC<IProps> = ({ id, onChange, onDelete, multiple
       <input
         id={id}
         type="file"
-        accept=".jpg,.jpeg,.png"
+        accept=".jpg,.jpeg,.png,.JPG"
         name="photo"
         onChange={onChange}
         multiple={multiple}

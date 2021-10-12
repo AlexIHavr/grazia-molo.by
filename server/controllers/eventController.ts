@@ -16,6 +16,15 @@ class EventController {
       next(e);
     }
   }
+
+  async getEvents(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = await eventService.getEvents();
+      res.json(data);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default new EventController();

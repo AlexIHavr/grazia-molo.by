@@ -24,7 +24,7 @@ const multerMiddleware = (baseDir: string, addDir?: string) => {
     }),
     fileFilter: (req, file, cb) => {
       const ext = path.extname(file.originalname);
-      if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+      if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg' && ext !== '.JPG') {
         return cb(
           ApiError.BadRequest('Неверное расширение файла. Допустимые расширения: png, jpg, jpeg')
         );

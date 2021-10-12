@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import React from 'react';
-import { video } from './Events/eventsType';
 import config from '../../../config/config';
+import { videoType } from './Events/eventsType';
 
 import { mainType } from './mainType';
 
@@ -178,7 +178,7 @@ class MainReducer {
   }
 
   //получение видео
-  getVideo(videos: video[]) {
+  getVideo(videos: videoType[]) {
     if (videos) {
       return (
         <div className="ContentVideos">
@@ -202,13 +202,13 @@ class MainReducer {
   }
 
   //получение простого контента
-  getSimpleContent(content: any[], title: string, imagesUrl?: string) {
+  getSimpleContent(content: any[], title: string, imagesUrl?: string, noDir?: 'noDir') {
     return content.map((value) => {
       return (
         <div key={value[title]} data-selected={value[title]}>
           <h3>{value[title + 'Name'] !== undefined ? value[title + 'Name'] : value[title]}</h3>
           {this.getDescription(value.description)}
-          {this.getImages(value.images, imagesUrl + value[title])}
+          {this.getImages(value.images, imagesUrl + (!noDir ? value[title] : ''))}
           {this.getVideo(value.videos)}
         </div>
       );

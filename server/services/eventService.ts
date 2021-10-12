@@ -10,6 +10,9 @@ class EventService {
     videoNames,
     videoLinks,
   }: eventRequestType) {
+    const descriptionArr = description.trim()
+      ? description.split('\n').filter((value) => value.trim() !== '')
+      : [];
     const videoNamesArr = videoNames.trim()
       ? videoNames.split('/').filter((value) => value.trim() !== '')
       : [];
@@ -24,11 +27,15 @@ class EventService {
     await eventModel.create({
       year,
       name,
-      description,
+      description: descriptionArr,
       photoNames,
       videoNames: videoNamesArr,
       videoLinks: videoLinksArr,
     });
+  }
+
+  async getEvents() {
+    return await eventModel.find().sort({ year: -1 });
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useParams } from 'react-router-dom';
 
@@ -11,12 +11,31 @@ const EventsContent: React.FC = () => {
   const { year, event } = useParams<{ year: string; event: string }>();
 
   const getContentEvents = () => {
-    const yearEvent = state.events
-      .find((e) => e.year === year)
-      .yearsEvent.find((yearEvent) => yearEvent.event === event);
+    const yearEvent = state.events.find((e) => e._id === event);
+    if (yearEvent) {
+      const simpleEvent = {
+        _id: yearEvent._id,
+        _idName: yearEvent.name,
+        description: yearEvent.description,
+        images: yearEvent.photoNames,
+        videos: yearEvent.videoNames.map((videoName, i) => ({
+          name: videoName,
+          url: yearEvent.videoLinks[i],
+        })),
+      };
 
-    return mainReducer.getSimpleContent([yearEvent], 'event', state.imagesUrl + year + '/');
+      return mainReducer.getSimpleContent(
+        [simpleEvent],
+        '_id',
+        state.imagesUrl + year + '/',
+        'noDir'
+      );
+    }
   };
+
+  useEffect(() => {
+    eventsReducer.loadEvents();
+  }, []);
 
   return (
     <>

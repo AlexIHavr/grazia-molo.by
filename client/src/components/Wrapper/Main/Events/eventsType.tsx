@@ -1,22 +1,19 @@
-export type video = {
+export type videoType = {
   name: string;
   url: string;
 };
 
-export type yearsEvent = {
-  event: string;
-  eventName: string;
+export type eventResponseType = {
+  _id: string;
+  year: number;
+  name: string;
   description: string[];
-  images?: string[];
-  videos?: video[];
-};
-
-export type eventType = {
-  year: string;
-  yearsEvent: yearsEvent[];
+  photoNames: string[];
+  videoNames: string[];
+  videoLinks: string[];
 };
 
 export type eventsType = {
-  events: eventType[];
+  events: eventResponseType[];
   imagesUrl: string;
 };
