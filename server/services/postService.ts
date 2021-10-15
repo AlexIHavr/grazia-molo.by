@@ -26,7 +26,7 @@ class PostService {
 
     //удаление существующей картинки
     if (photoName) {
-      fileService.unlinkPhoto(post.photoName, 'Posts');
+      fileService.unlinkPhoto(post.photoName, 'Forum/Posts');
       post.photoName = photoName;
       await post.save();
     }
@@ -46,7 +46,7 @@ class PostService {
       throw ApiError.BadRequest('Пост не найден');
     }
 
-    fileService.unlinkPhoto(post.photoName, 'Posts');
+    fileService.unlinkPhoto(post.photoName, 'Forum/Posts');
 
     await post.updateOne({
       photoName: '',
@@ -70,7 +70,7 @@ class PostService {
       })
     );
 
-    fileService.unlinkPhoto(post.photoName, 'Posts');
+    fileService.unlinkPhoto(post.photoName, 'Forum/Posts');
 
     await post.deleteOne();
   }

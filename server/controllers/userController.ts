@@ -10,6 +10,7 @@ import {
   userSettingsRequestType,
 } from '../types/servicesTypes';
 import lessonModel from '../models/lessonModel';
+import fileService from '../services/fileService';
 
 class UserController {
   async registration(
@@ -95,7 +96,7 @@ class UserController {
     try {
       ApiError.CheckValidationError(req);
 
-      req.body.photoName = req.file?.filename || '';
+      req.body.photoName = fileService.getPhotoName(req);
       const userData = await userService.changeUserSettings(req.body, req.cookies.userId);
       res.json(userData);
     } catch (e) {

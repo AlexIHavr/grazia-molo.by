@@ -9,12 +9,13 @@ import { Request, Response, NextFunction } from 'express';
 import ApiError from '../errors/apiError';
 import postService from '../services/postService';
 import { postCommentRequestType } from '../types/servicesTypes';
+import fileService from '../services/fileService';
 
 class PostController {
   async createPost(req: Request<{}, {}, postRequestType>, res: Response, next: NextFunction) {
     try {
       ApiError.CheckValidationError(req);
-      req.body.photoName = req.file?.filename || '';
+      req.body.photoName = fileService.getPhotoName(req);
       await postService.createPost(req.body, req.cookies.userId);
       res.status(200).json({ status: 'OK' });
     } catch (e) {
@@ -26,7 +27,7 @@ class PostController {
     try {
       ApiError.CheckValidationError(req);
 
-      req.body.photoName = req.file?.filename || '';
+      req.body.photoName = fileService.getPhotoName(req);
       await postService.changePost(req.body);
       res.status(200).json({ status: 'OK' });
     } catch (e) {

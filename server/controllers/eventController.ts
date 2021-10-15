@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import ApiError from '../errors/apiError';
 import eventService from '../services/eventService';
+import fileService from '../services/fileService';
 import { eventRequestType } from '../types/servicesTypes';
 
 class EventController {
@@ -8,7 +9,7 @@ class EventController {
     try {
       ApiError.CheckValidationError(req);
 
-      req.body.photoNames = Array.isArray(req.files) ? req.files.map((file) => file.filename) : [];
+      req.body.photoNames = fileService.getPhotoNames(req);
 
       await eventService.createEvent(req.body);
       res.status(200).json({ status: 'OK' });

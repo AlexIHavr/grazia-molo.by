@@ -131,7 +131,7 @@ class UserService {
 
     if (photoName) {
       //удаление существующей картинки
-      fileService.unlinkPhoto(user.photoName, 'Users');
+      fileService.unlinkPhoto(user.photoName, 'Forum/Users');
 
       user.photoName = photoName;
     }
@@ -148,7 +148,7 @@ class UserService {
     }
 
     //удаление существующей картинки
-    fileService.unlinkPhoto(user.photoName, 'Users');
+    fileService.unlinkPhoto(user.photoName, 'Forum/Users');
 
     await user.updateOne({ photoName: '' });
   }
