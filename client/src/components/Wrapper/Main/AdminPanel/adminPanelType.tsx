@@ -1,3 +1,4 @@
+import { eventResponseType } from '../Events/eventsType';
 import { postCommentResponseType, postResponseType } from '../Forum/forumType';
 import { lessonsResponseType } from '../Timetable/timetableType';
 
@@ -27,6 +28,9 @@ export type adminPanelType = {
   comments: commentType[];
   users: usersResponseType;
   lessons: lessonsResponseType;
+  events: eventResponseType[];
+  yearEvents: eventResponseType[];
   changedPost: postResponseType | null;
+  changedEvent: eventResponseType | null;
   isValidatedAll: boolean;
 };

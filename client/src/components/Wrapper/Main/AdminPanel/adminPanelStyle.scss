@@ -92,7 +92,8 @@
       .PostPhoto img {
         height: 150px;
       }
-      .DeletePost {
+      .DeletePost,
+      .DeleteEvent {
         margin: 10px auto 0 auto;
       }
     }
@@ -144,6 +145,21 @@
           font-size: 1.5rem;
           color: green;
         }
+      }
+    }
+  }
+
+  .SelectedEventPhotos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      img {
+        height: 150px;
       }
     }
   }

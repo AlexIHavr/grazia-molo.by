@@ -86,3 +86,17 @@ export type eventRequestType = {
   videoNames: string;
   videoLinks: string;
 };
+
+export type changeEventRequestType = {
+  changedYear: string;
+  eventId: string;
+} & eventRequestType;
+
+export type deleteEventPhotoRequestType = {
+  eventId: string;
+  photoName: string;
+};
+
+export type deleteEventRequestType = {
+  eventId: string;
+};

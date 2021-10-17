@@ -6,7 +6,7 @@ class CommentsDto {
   #comments: {
     _id: string;
     date: string;
-    text: string;
+    text: string[];
     fullName: string;
     photoName: string;
   }[] = [];

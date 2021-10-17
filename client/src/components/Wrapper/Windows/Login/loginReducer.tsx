@@ -106,9 +106,13 @@ class LoginReducer {
 
   //перезапись токена
   async refreshToken() {
-    const response = await visitorApi.get<loginResponseType>('/refresh');
-    localStorage.setItem('accessToken', response.data.accessToken);
-    this.setUserData(response.data);
+    try {
+      const response = await visitorApi.get<loginResponseType>('/refresh');
+      localStorage.setItem('accessToken', response.data.accessToken);
+      this.setUserData(response.data);
+    } catch (e: any) {
+      console.log(e.response?.data || e);
+    }
   }
 
   //установка данных пользователя

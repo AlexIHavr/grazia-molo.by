@@ -18,7 +18,7 @@ export type userModelType = {
 
 export type postModelType = {
   name: string;
-  description: string;
+  description: string[];
   photoName: string;
   date: string;
   dateCreation: Date;
@@ -30,7 +30,7 @@ export type commentModelType = {
   post: string;
   date: string;
   dateCreation: Date;
-  text: string;
+  text: string[];
   isValidated: boolean;
 } & Document;
 
@@ -44,8 +44,8 @@ export type lessonModelType = {
 export type eventModelType = {
   year: number;
   name: string;
-  description: string;
+  description: string[];
   photoNames: string[];
   videoNames: string[];
   videoLinks: string[];
-};
+} & Document;

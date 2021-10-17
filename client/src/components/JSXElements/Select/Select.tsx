@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import './selectStyle.scss';
 
 interface IProps {
+  inputName: string;
   onSelect: Function;
   options: {
     _id: string;
     name: string;
   }[];
+  defaultTitle: string;
 }
 
-const Select: React.FC<IProps> = ({ onSelect, options }) => {
+const Select: React.FC<IProps> = ({ inputName, onSelect, options, defaultTitle }) => {
   const [id, setId] = useState<string>('');
-  const [value, setValue] = useState<string>('Выберите пост');
+  const [value, setValue] = useState<string>(defaultTitle);
   const [showSelectOptions, setShowSelectOptions] = useState<boolean>(false);
 
   const changeValue = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -26,7 +28,7 @@ const Select: React.FC<IProps> = ({ onSelect, options }) => {
       className={'Select ' + (showSelectOptions ? 'clickedSelect' : '')}
       onClick={() => setShowSelectOptions(!showSelectOptions)}
     >
-      <input type="hidden" name="postId" value={id} />
+      <input type="hidden" name={inputName} value={id} />
       <div className="SelectValue">
         <div>{value}</div>
         <i

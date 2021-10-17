@@ -31,11 +31,19 @@ adminRouter.put(
   validationMiddleware(['name']),
   postController.changePost
 );
+adminRouter.put(
+  '/changeEvent',
+  multerMiddleware('Events', 'year', 'changedYear'),
+  validationMiddleware(['year', 'name']),
+  eventController.changeEvent
+);
 adminRouter.put('/changeIsValidatedComments', postController.changeIsValidateComments);
 adminRouter.put('/changeIsBanUsers', userController.changeIsBanUsers);
 adminRouter.put('/changeTimetable', timetableController.changeTimetable);
 
 adminRouter.delete('/deletePostPhoto', postController.deletePostPhoto);
+adminRouter.delete('/deleteEventPhoto', eventController.deleteEventPhoto);
 adminRouter.delete('/deletePost', postController.deletePost);
+adminRouter.delete('/deleteEvent', eventController.deleteEvent);
 
 export default adminRouter;

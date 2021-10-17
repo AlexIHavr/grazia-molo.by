@@ -5,6 +5,7 @@ import { postCommentsResponseType, postResponseType } from '../Forum/forumType';
 import { adminPanelType, commentType, userResponseType, usersResponseType } from './adminPanelType';
 import timetableReducer from '../Timetable/timetableReducer';
 import { lessonResponseType } from '../Timetable/timetableType';
+import eventsReducer from '../Events/eventsReducer';
 
 class AdminPanelReducer {
   constructor() {
@@ -49,12 +50,21 @@ class AdminPanelReducer {
         errorMessage: '',
         successMessage: '',
       },
+      {
+        panel: 'ChangeEvent',
+        panelName: 'Изменить событие',
+        errorMessage: '',
+        successMessage: '',
+      },
     ],
     posts: [],
     comments: [],
     users: [],
     lessons: [],
+    events: [],
+    yearEvents: [],
     changedPost: null,
+    changedEvent: null,
     isValidatedAll: false,
   };
 
@@ -276,6 +286,58 @@ class AdminPanelReducer {
       this.showSuccessMessage('Событие создано', 'CreateEvent');
     } catch (e) {
       this.showErrorMessage(e, 'CreateEvent');
+    }
+  }
+
+  //получение событий
+  async getEvents() {
+    if (!eventsReducer.state.events.length) {
+      await eventsReducer.loadEvents();
+    }
+
+    this.state.events = [...eventsReducer.state.events];
+  }
+
+  //изменение события
+  async changeEvent(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      await adminApi.put('/changeEvent', new FormData(e.currentTarget));
+      this.showSuccessMessage('Событие изменено', 'ChangeEvent');
+    } catch (e) {
+      this.showErrorMessage(e, 'ChangeEvent');
+    }
+  }
+
+  //выбор событий выбранного года
+  selectYearEvents(selectedYear: string) {
+    this.state.yearEvents = this.state.events.filter(({ year }) => year === selectedYear);
+  }
+
+  //выбор события выбранного года
+  selectEvent(id: string) {
+    this.state.changedEvent = this.state.events.find(({ _id }) => _id === id);
+  }
+
+  //удаление картинки события
+  async deleteEventPhoto(photoName: string) {
+    try {
+      await adminApi.delete('/deleteEventPhoto', {
+        data: { eventId: this.state.changedEvent._id, photoName },
+      });
+      this.showSuccessMessage('Фото успешно удалено', 'ChangeEvent');
+    } catch (e) {
+      this.showErrorMessage(e, 'ChangeEvent');
+    }
+  }
+
+  //удалить событие
+  async deleteEvent() {
+    try {
+      await adminApi.delete('/deleteEvent', { data: { eventId: this.state.changedEvent._id } });
+      this.showSuccessMessage('Событие успешно удалено', 'ChangeEvent');
+    } catch (e) {
+      this.showErrorMessage(e, 'ChangeEvent');
     }
   }
 }

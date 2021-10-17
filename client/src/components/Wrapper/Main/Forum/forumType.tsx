@@ -1,7 +1,7 @@
 export type postResponseType = {
   _id: string;
   name: string;
-  description: string;
+  description: string[];
   photoName: string;
   date: string;
   dateCreation: Date;
@@ -18,7 +18,7 @@ export type postCommentResponseType = {
   _id: string;
   fullName: string;
   date: string;
-  text: string;
+  text: string[];
   photoName: string;
   zoomInPhoto: boolean;
 };

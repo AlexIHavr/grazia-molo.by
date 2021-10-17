@@ -13,6 +13,7 @@
     overflow: hidden;
     left: 0;
     top: 100%;
+    z-index: 1;
     & > div {
       border: 2px solid $baseTextColor !important;
       border-bottom: none !important;

@@ -5,7 +5,7 @@ export type videoType = {
 
 export type eventResponseType = {
   _id: string;
-  year: number;
+  year: string;
   name: string;
   description: string[];
   photoNames: string[];

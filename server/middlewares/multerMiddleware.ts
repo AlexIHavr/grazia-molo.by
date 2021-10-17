@@ -5,7 +5,7 @@ import path from 'path';
 import ApiError from '../errors/apiError';
 import fileService from '../services/fileService';
 
-const multerMiddleware = (baseDir: string, addDir?: string) => {
+const multerMiddleware = (baseDir: string, addDir?: string, renameDir?: string) => {
   const multerSettings = multer({
     storage: multer.diskStorage({
       destination: (req, file, cb) => {
@@ -13,6 +13,12 @@ const multerMiddleware = (baseDir: string, addDir?: string) => {
         //создание доп. папки
         if (addDir) {
           dir = `${baseDir}/${req.body[addDir]}`;
+
+          //переименование существующей папки
+          if (renameDir) {
+            fileService.renameForPhotos(`${baseDir}/${req.body[renameDir]}`, dir);
+          }
+
           fileService.mkdirForPhotos(dir);
         }
 

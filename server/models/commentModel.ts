@@ -6,7 +6,7 @@ const commentModel = new Schema({
   post: { type: Types.ObjectId, ref: 'Post', require: true },
   date: { type: String, default: new Date().toLocaleString() },
   dateCreation: { type: Date, default: new Date() },
-  text: { type: String, require: true },
+  text: [String],
   isValidated: { type: Boolean, default: false },
 });
 

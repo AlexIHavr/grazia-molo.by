@@ -14,7 +14,7 @@ const EventsNavContent: React.FC = () => {
   const getNavEvents = (currentYear: string) => {
     if (currentYear === year) {
       return state.events
-        .filter((e) => e.year + '' === year)
+        .filter((e) => e.year === year)
         .map((e) => {
           return (
             <NavLink key={e._id} to={`/Events/${currentYear}/${e._id}`}>
@@ -26,18 +26,13 @@ const EventsNavContent: React.FC = () => {
   };
 
   const getNavYears = () => {
-    const uniqueYears = state.events.reduce((uniqueArr, e) => {
-      if (!uniqueArr.includes(e.year)) uniqueArr.push(e.year);
-      return uniqueArr;
-    }, []);
-
-    return uniqueYears.map((year) => {
+    return eventsReducer.getUniqueYears().map((year) => {
       return (
         <Fragment key={year}>
           <NavLink className="YearsEvents" to={`/Events/${year}`}>
             {year}
           </NavLink>
-          {getNavEvents(year + '')}
+          {getNavEvents(year)}
         </Fragment>
       );
     });

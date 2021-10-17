@@ -11,10 +11,16 @@ import CommentsDto from '../dtos/commentsDto';
 import { postCommentRequestType } from '../types/servicesTypes';
 import ApiError from '../errors/apiError';
 import fileService from './fileService';
+import textService from './textService';
 
 class PostService {
   async createPost({ name, description, photoName }: postRequestType, userId: string) {
-    await postModel.create({ name, description, photoName, viewsUsers: [userId] });
+    await postModel.create({
+      name,
+      description: textService.getTextArr(description, '\n'),
+      photoName,
+      viewsUsers: [userId],
+    });
   }
 
   async changePost({ postId, name, description, photoName }: changePostRequestType) {
@@ -33,7 +39,7 @@ class PostService {
 
     await post.updateOne({
       name,
-      description,
+      description: textService.getTextArr(description, '\n'),
       dateCreation: new Date(),
       date: new Date().toLocaleString(),
     });
@@ -76,7 +82,7 @@ class PostService {
   }
 
   async createPostComment({ user, post, text }: postCommentRequestType) {
-    await commentModel.create({ user, post, text });
+    await commentModel.create({ user, post, text: textService.getTextArr(text, '\n') });
   }
 
   async getPostComments(post: string) {

@@ -26,7 +26,11 @@ const ForumContent: React.FC = () => {
             ) : (
               ''
             )}
-            <div className="PostDescription">{post.description}</div>
+            <div className="PostDescription Description">
+              {post.description.map((text, i) => {
+                return <div key={i}>{text}</div>;
+              })}
+            </div>
             <div className="PostViews">
               <i className="far fa-eye"></i>
               <span className="PostCountViews">{post.viewsUsers.length}</span>
@@ -110,7 +114,11 @@ const ForumContent: React.FC = () => {
                   <div className="UserNameComment">{comment.fullName}</div>
                   <div>{comment.date}</div>
                 </div>
-                <div className="UserComment">{comment.text}</div>
+                <div className="UserComment Description">
+                  {comment.text.map((text, i) => {
+                    return <div key={i}>{text}</div>;
+                  })}
+                </div>
               </div>
             );
           })
