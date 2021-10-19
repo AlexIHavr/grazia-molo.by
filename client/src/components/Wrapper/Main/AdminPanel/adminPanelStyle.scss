@@ -93,7 +93,7 @@
         height: 150px;
       }
       .DeletePost,
-      .DeleteEvent {
+      .DeleteSection {
         margin: 10px auto 0 auto;
       }
     }
@@ -149,7 +149,7 @@
     }
   }
 
-  .SelectedEventPhotos {
+  .SelectedSectionPhotos {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

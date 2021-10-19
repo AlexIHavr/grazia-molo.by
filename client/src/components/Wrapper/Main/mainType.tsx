@@ -8,6 +8,17 @@ type settingsType = {
   adaptiveWidth2: number;
 };
 
+export type navigationResponseType = {
+  _id: string;
+  category: string;
+  subCategory: string;
+  section: string;
+  description: string[];
+  photoNames: string[];
+  videoNames: string[];
+  videoLinks: string[];
+};
+
 export type mainType = {
   documentElem: HTMLElement;
   activateIMoveUpDocument: boolean;
@@ -20,5 +31,6 @@ export type mainType = {
   refNavContent: React.MutableRefObject<HTMLDivElement> | null;
   iSelectedItem: number;
   currentPage: string;
+  navigations: navigationResponseType[];
   settings: settingsType;
 };

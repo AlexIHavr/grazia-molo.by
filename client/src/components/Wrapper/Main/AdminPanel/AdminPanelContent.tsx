@@ -9,8 +9,8 @@ import ChangePost from './Panels/ChangePost';
 import ValidationComments from './Panels/ValidationComments';
 import BanUsers from './Panels/BanUsers';
 import ManageTimetable from './Panels/ManageTimetable';
-import CreateEvent from './Panels/CreateEvent';
-import ChangeEvent from './Panels/ChangeEvent';
+import CreateSection from './Panels/CreateSection';
+import ChangeSection from './Panels/ChangeSection';
 
 const AdminPanelContent: React.FC = () => {
   useEffect(() => {
@@ -18,7 +18,6 @@ const AdminPanelContent: React.FC = () => {
     adminPanelReducer.loadUnvalidatedComments();
     adminPanelReducer.getUsers();
     adminPanelReducer.getLessons();
-    adminPanelReducer.getEvents();
   }, []);
 
   return (
@@ -28,8 +27,8 @@ const AdminPanelContent: React.FC = () => {
       <ValidationComments />
       <BanUsers />
       <ManageTimetable />
-      <CreateEvent />
-      <ChangeEvent />
+      <CreateSection />
+      <ChangeSection />
     </>
   );
 };

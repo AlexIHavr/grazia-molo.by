@@ -1,0 +1,113 @@
+import React from 'react';
+import { observer } from 'mobx-react';
+import preloaderReducer from '../../../Windows/Preloader/preloaderReducer';
+import adminPanelReducer from '../adminPanelReducer';
+import FileInputContainer from '../../../../JSXElements/FileInputContainer/FileInputContainer';
+import Select from '../../../../JSXElements/Select/Select';
+
+const CreateSection: React.FC = () => {
+  const state = adminPanelReducer.state;
+  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'CreateSection');
+
+  return (
+    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+      <form
+        onSubmit={(e) => {
+          adminPanelReducer.createSection(e);
+        }}
+      >
+        <h1>{adminPanel.panelName}</h1>
+
+        <label htmlFor="ChooseNavigation">Изменяемая категория</label>
+        <div className="InputContainer">
+          <i className="fas fa-bars"></i>
+          <Select
+            inputName="category"
+            onSelect={adminPanelReducer.selectCategory.bind(adminPanelReducer)}
+            options={state.changeableNavigations.map(({ _id, name }) => ({ _id, name }))}
+            defaultTitle="Выберите категорию"
+          ></Select>
+        </div>
+
+        {state.selectedCategory ? (
+          <>
+            <label htmlFor="SubCategory">Имя подкатегории</label>
+            <div className="InputContainer">
+              <i className="fas fa-folder-open"></i>
+              <input
+                id="SubCategory"
+                name="subCategory"
+                type="text"
+                placeholder="Введите имя подкатегории"
+              />
+            </div>
+
+            <label htmlFor="SectionName">Имя раздела</label>
+            <div className="InputContainer">
+              <i className="fas fa-pencil-alt"></i>
+              <input
+                id="SectionName"
+                name="section"
+                type="text"
+                placeholder="Введите имя раздела"
+                required
+              />
+            </div>
+
+            <label htmlFor="SectionDescription">Описание раздела</label>
+            <textarea
+              id="SectionDescription"
+              name="description"
+              placeholder="Введите описание раздела"
+            />
+
+            <label htmlFor="VideosNames">Имена видео</label>
+            <div className="InputContainer">
+              <i className="fas fa-video"></i>
+              <input
+                id="VideosNames"
+                name="videoNames"
+                type="text"
+                placeholder="Введите имена видео, разделенные знаком '/'"
+              />
+            </div>
+
+            <label htmlFor="VideosLinks">Ссылки видео в ютубе</label>
+            <div className="InputContainer">
+              <i className="fab fa-youtube"></i>
+              <input
+                id="VideosLinks"
+                name="videoLinks"
+                type="text"
+                placeholder="Введите ссылки на видео, разделенные знаком '/'"
+              />
+            </div>
+
+            <FileInputContainer
+              id="AddEventPhotos"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                adminPanelReducer.uploadPostPhoto(e, 'CreateSection');
+              }}
+              multiple={true}
+            ></FileInputContainer>
+
+            <div className="Errors">{adminPanel.errorMessage}</div>
+            <div className="Successes">{adminPanel.successMessage}</div>
+
+            <button
+              type="submit"
+              className="button"
+              disabled={preloaderReducer.state.activatePreloader}
+            >
+              {adminPanel.panelName}
+            </button>
+          </>
+        ) : (
+          ''
+        )}
+      </form>
+    </div>
+  );
+};
+
+export default observer(CreateSection);

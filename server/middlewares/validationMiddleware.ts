@@ -4,7 +4,16 @@ const validationMiddleware = (fields: string[]) => {
   const stackFields: Function[] = [];
   fields.forEach((field) => {
     switch (field) {
+      case 'subCategory':
+        stackFields.push(() =>
+          body(field)
+            .trim()
+            .isLength({ max: 50 })
+            .withMessage('Имя подкатегории не должно превышать 50 символов')
+        );
+        break;
       case 'name':
+      case 'section':
         stackFields.push(() =>
           body(field)
             .trim()

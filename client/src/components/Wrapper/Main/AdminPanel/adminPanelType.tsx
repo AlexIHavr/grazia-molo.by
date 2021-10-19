@@ -1,5 +1,5 @@
-import { eventResponseType } from '../Events/eventsType';
 import { postCommentResponseType, postResponseType } from '../Forum/forumType';
+import { navigationResponseType } from '../mainType';
 import { lessonsResponseType } from '../Timetable/timetableType';
 
 type panelType = {
@@ -22,15 +22,22 @@ export type userResponseType = {
 
 export type usersResponseType = userResponseType[];
 
+export type changeableNavigationType = {
+  _id: string;
+  name: string;
+};
+
 export type adminPanelType = {
   panels: panelType[];
+  changeableNavigations: changeableNavigationType[];
   posts: postResponseType[];
   comments: commentType[];
   users: usersResponseType;
   lessons: lessonsResponseType;
-  events: eventResponseType[];
-  yearEvents: eventResponseType[];
+  changedSubCategories: navigationResponseType[];
   changedPost: postResponseType | null;
-  changedEvent: eventResponseType | null;
+  changedCategories: navigationResponseType[];
+  changedSection: navigationResponseType | null;
+  selectedCategory: string | null;
   isValidatedAll: boolean;
 };

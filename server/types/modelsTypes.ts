@@ -41,9 +41,10 @@ export type lessonModelType = {
   group: string;
 } & Document;
 
-export type eventModelType = {
-  year: number;
-  name: string;
+export type navigationModelType = {
+  category: string;
+  subCategory: string;
+  section: string;
   description: string[];
   photoNames: string[];
   videoNames: string[];

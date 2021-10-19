@@ -15,7 +15,7 @@ const EventsContent: React.FC = () => {
     if (yearEvent) {
       const simpleEvent = {
         _id: yearEvent._id,
-        _idName: yearEvent.name,
+        _idName: yearEvent.section,
         description: yearEvent.description,
         images: yearEvent.photoNames,
         videos: yearEvent.videoNames.map((videoName, i) => ({

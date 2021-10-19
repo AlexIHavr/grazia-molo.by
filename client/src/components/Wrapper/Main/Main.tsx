@@ -61,6 +61,9 @@ const Main: React.FC = () => {
     //проверка на авторизованность
     loginReducer.checkAuth();
 
+    //получение навигации
+    mainReducer.getNavigations();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

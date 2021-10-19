@@ -10,13 +10,14 @@ const multerMiddleware = (baseDir: string, addDir?: string, renameDir?: string) 
     storage: multer.diskStorage({
       destination: (req, file, cb) => {
         let dir = baseDir;
+
         //создание доп. папки
         if (addDir) {
-          dir = `${baseDir}/${req.body[addDir]}`;
+          dir = `${req.body[baseDir]}/${req.body[addDir]}`;
 
           //переименование существующей папки
           if (renameDir) {
-            fileService.renameForPhotos(`${baseDir}/${req.body[renameDir]}`, dir);
+            fileService.renameForPhotos(`${req.body[baseDir]}/${req.body[renameDir]}`, dir);
           }
 
           fileService.mkdirForPhotos(dir);

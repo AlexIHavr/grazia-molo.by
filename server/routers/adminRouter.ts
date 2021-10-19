@@ -4,13 +4,12 @@ import userController from '../controllers/userController';
 import timetableController from '../controllers/timetableController';
 import multerMiddleware from '../middlewares/multerMiddleware';
 import validationMiddleware from '../middlewares/validationMiddleware';
-import eventController from '../controllers/eventController';
+import eventController from '../controllers/navigationController';
 
 const adminRouter: Router = Router();
 
 adminRouter.get('/getUnvalidatedComments', postController.getUnvalidatedComments);
 adminRouter.get('/getUsers', userController.getUsers);
-adminRouter.get('/getEvents', eventController.getEvents);
 
 adminRouter.post(
   '/createPost',
@@ -19,10 +18,10 @@ adminRouter.post(
   postController.createPost
 );
 adminRouter.post(
-  '/createEvent',
-  multerMiddleware('Events', 'year'),
-  validationMiddleware(['year', 'name']),
-  eventController.createEvent
+  '/createSection',
+  multerMiddleware('category', 'subCategory'),
+  validationMiddleware(['section', 'subCategory']),
+  eventController.createSection
 );
 
 adminRouter.put(
@@ -32,18 +31,18 @@ adminRouter.put(
   postController.changePost
 );
 adminRouter.put(
-  '/changeEvent',
-  multerMiddleware('Events', 'year', 'changedYear'),
-  validationMiddleware(['year', 'name']),
-  eventController.changeEvent
+  '/changeSection',
+  multerMiddleware('category', 'oldSubCategory', 'subCategory'),
+  validationMiddleware(['section', 'subCategory']),
+  eventController.changeSection
 );
 adminRouter.put('/changeIsValidatedComments', postController.changeIsValidateComments);
 adminRouter.put('/changeIsBanUsers', userController.changeIsBanUsers);
 adminRouter.put('/changeTimetable', timetableController.changeTimetable);
 
 adminRouter.delete('/deletePostPhoto', postController.deletePostPhoto);
-adminRouter.delete('/deleteEventPhoto', eventController.deleteEventPhoto);
+adminRouter.delete('/deleteSectionPhoto', eventController.deleteSectionPhoto);
 adminRouter.delete('/deletePost', postController.deletePost);
-adminRouter.delete('/deleteEvent', eventController.deleteEvent);
+adminRouter.delete('/deleteSection', eventController.deleteSection);
 
 export default adminRouter;

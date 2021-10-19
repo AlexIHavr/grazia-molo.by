@@ -5,7 +5,7 @@ import { postCommentsResponseType, postResponseType } from '../Forum/forumType';
 import { adminPanelType, commentType, userResponseType, usersResponseType } from './adminPanelType';
 import timetableReducer from '../Timetable/timetableReducer';
 import { lessonResponseType } from '../Timetable/timetableType';
-import eventsReducer from '../Events/eventsReducer';
+import mainReducer from '../mainReducer';
 
 class AdminPanelReducer {
   constructor() {
@@ -45,26 +45,49 @@ class AdminPanelReducer {
         successMessage: '',
       },
       {
-        panel: 'CreateEvent',
-        panelName: 'Создать событие',
+        panel: 'CreateSection',
+        panelName: 'Создать раздел',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'ChangeEvent',
-        panelName: 'Изменить событие',
+        panel: 'ChangeSection',
+        panelName: 'Изменить раздел',
         errorMessage: '',
         successMessage: '',
+      },
+    ],
+    changeableNavigations: [
+      {
+        _id: 'MainPage',
+        name: 'Главная',
+      },
+      {
+        _id: 'Dances',
+        name: 'Танцы',
+      },
+      {
+        _id: 'Events',
+        name: 'События',
+      },
+      {
+        _id: 'Creativity',
+        name: 'Творчество',
+      },
+      {
+        _id: 'History',
+        name: 'История',
       },
     ],
     posts: [],
     comments: [],
     users: [],
     lessons: [],
-    events: [],
-    yearEvents: [],
+    changedCategories: [],
+    changedSubCategories: [],
+    changedSection: null,
     changedPost: null,
-    changedEvent: null,
+    selectedCategory: null,
     isValidatedAll: false,
   };
 
@@ -278,66 +301,75 @@ class AdminPanelReducer {
   }
 
   //создание события
-  async createEvent(e: React.FormEvent<HTMLFormElement>) {
+  async createSection(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     try {
-      await adminApi.post('/createEvent', new FormData(e.currentTarget));
-      this.showSuccessMessage('Событие создано', 'CreateEvent');
+      await adminApi.post('/createSection', new FormData(e.currentTarget));
+      this.showSuccessMessage('Раздел создан', 'CreateSection');
     } catch (e) {
-      this.showErrorMessage(e, 'CreateEvent');
+      this.showErrorMessage(e, 'CreateSection');
     }
   }
 
-  //получение событий
-  async getEvents() {
-    if (!eventsReducer.state.events.length) {
-      await eventsReducer.loadEvents();
-    }
-
-    this.state.events = [...eventsReducer.state.events];
-  }
-
-  //изменение события
-  async changeEvent(e: React.FormEvent<HTMLFormElement>) {
+  //изменение категории
+  async changeSection(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      await adminApi.put('/changeEvent', new FormData(e.currentTarget));
-      this.showSuccessMessage('Событие изменено', 'ChangeEvent');
+      await adminApi.put('/changeSection', new FormData(e.currentTarget));
+      this.showSuccessMessage('Раздел изменен', 'ChangeSection');
     } catch (e) {
-      this.showErrorMessage(e, 'ChangeEvent');
+      this.showErrorMessage(e, 'ChangeSection');
     }
   }
 
   //выбор событий выбранного года
-  selectYearEvents(selectedYear: string) {
-    this.state.yearEvents = this.state.events.filter(({ year }) => year === selectedYear);
+  selectChangedSubCategories(selectSubCategory: string) {
+    this.state.changedSubCategories = this.state.changedCategories.filter(
+      ({ subCategory }) => subCategory === selectSubCategory
+    );
+    this.state.changedSection = null;
   }
 
-  //выбор события выбранного года
-  selectEvent(id: string) {
-    this.state.changedEvent = this.state.events.find(({ _id }) => _id === id);
+  //выбор категории
+  selectCategory(category: string) {
+    this.state.selectedCategory = category;
   }
 
-  //удаление картинки события
-  async deleteEventPhoto(photoName: string) {
+  //выбор изменяемой категории
+  selectChangedCategory(selectCategory: string) {
+    this.state.changedCategories = mainReducer.state.navigations.filter(
+      ({ category }) => category === selectCategory
+    );
+    this.state.changedSubCategories = [];
+  }
+
+  //выбор раздела
+  selectChangedSection(id: string) {
+    this.state.changedSection = this.state.changedSubCategories.find(({ _id }) => _id === id);
+  }
+
+  //удаление картинки раздела
+  async deleteSectionPhoto(photoName: string) {
     try {
-      await adminApi.delete('/deleteEventPhoto', {
-        data: { eventId: this.state.changedEvent._id, photoName },
+      await adminApi.delete('/deleteSectionPhoto', {
+        data: { sectionId: this.state.changedSection._id, photoName },
       });
-      this.showSuccessMessage('Фото успешно удалено', 'ChangeEvent');
+      this.showSuccessMessage('Фото успешно удалено', 'ChangeSection');
     } catch (e) {
-      this.showErrorMessage(e, 'ChangeEvent');
+      this.showErrorMessage(e, 'ChangeSection');
     }
   }
 
-  //удалить событие
-  async deleteEvent() {
+  //удалить раздел
+  async deleteSection() {
     try {
-      await adminApi.delete('/deleteEvent', { data: { eventId: this.state.changedEvent._id } });
-      this.showSuccessMessage('Событие успешно удалено', 'ChangeEvent');
+      await adminApi.delete('/deleteSection', {
+        data: { sectionId: this.state.changedSection._id },
+      });
+      this.showSuccessMessage('Раздел успешно удален', 'ChangeSection');
     } catch (e) {
-      this.showErrorMessage(e, 'ChangeEvent');
+      this.showErrorMessage(e, 'ChangeSection');
     }
   }
 }

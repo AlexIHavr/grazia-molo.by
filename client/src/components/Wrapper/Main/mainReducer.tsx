@@ -1,9 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 import React from 'react';
+import { visitorApi } from '../../../api/api';
 import config from '../../../config/config';
 import { videoType } from './Events/eventsType';
 
-import { mainType } from './mainType';
+import { mainType, navigationResponseType } from './mainType';
 
 class MainReducer {
   constructor() {
@@ -22,6 +23,7 @@ class MainReducer {
     refNavContent: null,
     iSelectedItem: 0,
     currentPage: window.location.href.split('/')[3] || 'MainPage',
+    navigations: [],
     settings: {
       offsetNavScroll: 250, //смещение навигации при появление ее прокрутки (стрелок)
       addOffsetContentScroll: 10, //дополнительный отступ контента при активации навигации
@@ -253,6 +255,24 @@ class MainReducer {
   //закрыть главное меню
   closeMainMenu() {
     this.state.activateMainMenu = false;
+  }
+
+  //получение навигации
+  async getNavigations() {
+    try {
+      const navigations = await visitorApi.get<navigationResponseType[]>('/getNavigations');
+      this.state.navigations = navigations.data;
+    } catch (e: any) {
+      console.log(e.response?.data || e);
+    }
+  }
+
+  //получение уникальных подкатегорий
+  getUniqueSubCategories(categories: navigationResponseType[]) {
+    return categories.reduce((uniqueArr, category) => {
+      if (!uniqueArr.includes(category.subCategory)) uniqueArr.push(category.subCategory);
+      return uniqueArr;
+    }, []);
   }
 }
 

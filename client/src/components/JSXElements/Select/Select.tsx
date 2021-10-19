@@ -9,9 +9,10 @@ interface IProps {
     name: string;
   }[];
   defaultTitle: string;
+  isNullValue?: boolean; //только при наличии зависимого селекта (селекта-родителя)
 }
 
-const Select: React.FC<IProps> = ({ inputName, onSelect, options, defaultTitle }) => {
+const Select: React.FC<IProps> = ({ inputName, onSelect, options, defaultTitle, isNullValue }) => {
   const [id, setId] = useState<string>('');
   const [value, setValue] = useState<string>(defaultTitle);
   const [showSelectOptions, setShowSelectOptions] = useState<boolean>(false);
@@ -30,7 +31,7 @@ const Select: React.FC<IProps> = ({ inputName, onSelect, options, defaultTitle }
     >
       <input type="hidden" name={inputName} value={id} />
       <div className="SelectValue">
-        <div>{value}</div>
+        <div>{isNullValue ? defaultTitle : value}</div>
         <i
           className={'fas fa-chevron-circle-down ' + (showSelectOptions ? 'rotateSelectArrow' : '')}
         ></i>

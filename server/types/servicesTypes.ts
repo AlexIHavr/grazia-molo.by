@@ -78,25 +78,26 @@ export type lessonsRequestType = {
   }[];
 };
 
-export type eventRequestType = {
-  year: string;
-  name: string;
+export type navigationRequestType = {
+  category: string;
+  subCategory: string;
+  section: string;
   description: string;
   photoNames: string[];
   videoNames: string;
   videoLinks: string;
 };
 
-export type changeEventRequestType = {
-  changedYear: string;
-  eventId: string;
-} & eventRequestType;
+export type changeSectionRequestType = {
+  oldSubCategory: string;
+  sectionId: string;
+} & navigationRequestType;
 
-export type deleteEventPhotoRequestType = {
-  eventId: string;
+export type deleteSectionPhotoRequestType = {
+  sectionId: string;
   photoName: string;
 };
 
-export type deleteEventRequestType = {
-  eventId: string;
+export type deleteSectionRequestType = {
+  sectionId: string;
 };

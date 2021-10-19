@@ -1,7 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 import { adminApi } from '../../../../api/api';
+import { navigationResponseType } from '../mainType';
 
-import { eventResponseType, eventsType } from './eventsType';
+import { eventsType } from './eventsType';
 
 class EventsReducer {
   constructor() {
@@ -15,18 +16,11 @@ class EventsReducer {
 
   async loadEvents() {
     try {
-      const events = await adminApi.get<eventResponseType[]>('/getEvents');
-      this.state.events = events.data.map((event) => ({ ...event, year: event.year + '' }));
+      const events = await adminApi.get<navigationResponseType[]>('/getNavigations');
+      this.state.events = events.data.map((event) => ({ ...event, year: event.subCategory + '' }));
     } catch (e: any) {
       console.log(e.response?.data || e);
     }
-  }
-
-  getUniqueYears() {
-    return this.state.events.reduce((uniqueArr, e) => {
-      if (!uniqueArr.includes(e.year)) uniqueArr.push(e.year);
-      return uniqueArr;
-    }, []);
   }
 }
 
