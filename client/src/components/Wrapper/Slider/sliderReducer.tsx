@@ -1,4 +1,6 @@
 import { makeAutoObservable } from 'mobx';
+import { visitorApi } from '../../../api/api';
+import { sliderResponseType } from '../Main/AdminPanel/adminPanelType';
 
 import { sliderType } from './sliderType';
 
@@ -8,19 +10,8 @@ class SliderReducer {
   }
 
   state: sliderType = {
-    framesUrl: process.env.PUBLIC_URL + '/Images/Wrapper/Slider/',
-    frames: this.getShuffledRandomArr([
-      '1.png',
-      '2.png',
-      '3.png',
-      '4.png',
-      '5.png',
-      '6.png',
-      '7.png',
-      '8.png',
-      '9.png',
-      '10.png',
-    ]),
+    framesUrl: process.env.PUBLIC_URL + '/Images/Wrapper/Main/Slider/',
+    frames: [],
     activeFrame: 0,
     sliderTimer: setInterval(() => {}, 0),
     settings: {
@@ -63,6 +54,16 @@ class SliderReducer {
     }
 
     return arr;
+  }
+
+  //получить кадры слайдера
+  async getSliderFrames() {
+    try {
+      const sliders = await visitorApi.get<sliderResponseType[]>('/getSliders');
+      this.state.frames = this.getShuffledRandomArr(sliders.data[0].photoNames);
+    } catch (e: any) {
+      console.log(e.response?.data || e);
+    }
   }
 }
 

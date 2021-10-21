@@ -27,7 +27,7 @@ const CreatePost: React.FC = () => {
         <FileInputContainer
           id="AddPostPhoto"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            adminPanelReducer.uploadPostPhoto(e, 'CreatePost');
+            adminPanelReducer.uploadPhotos(e, 'CreatePost');
           }}
         ></FileInputContainer>
         <div className="Errors">{adminPanel.errorMessage}</div>

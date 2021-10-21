@@ -5,6 +5,7 @@ import timetableController from '../controllers/timetableController';
 import multerMiddleware from '../middlewares/multerMiddleware';
 import validationMiddleware from '../middlewares/validationMiddleware';
 import navigationController from '../controllers/navigationController';
+import sliderController from '../controllers/sliderController';
 
 const adminRouter: Router = Router();
 
@@ -39,10 +40,12 @@ adminRouter.put(
 adminRouter.put('/changeIsValidatedComments', postController.changeIsValidateComments);
 adminRouter.put('/changeIsBanUsers', userController.changeIsBanUsers);
 adminRouter.put('/changeTimetable', timetableController.changeTimetable);
+adminRouter.put('/changeSlider', multerMiddleware('Slider'), sliderController.changeSlider);
 
 adminRouter.delete('/deletePostPhoto', postController.deletePostPhoto);
 adminRouter.delete('/deleteSectionPhoto', navigationController.deleteSectionPhoto);
 adminRouter.delete('/deletePost', postController.deletePost);
 adminRouter.delete('/deleteSection', navigationController.deleteSection);
+adminRouter.delete('/deleteSliderPhoto', sliderController.deleteSliderPhoto);
 
 export default adminRouter;

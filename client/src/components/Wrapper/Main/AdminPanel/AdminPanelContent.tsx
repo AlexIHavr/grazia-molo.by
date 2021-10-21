@@ -11,6 +11,7 @@ import BanUsers from './Panels/BanUsers';
 import ManageTimetable from './Panels/ManageTimetable';
 import CreateSection from './Panels/CreateSection';
 import ChangeSection from './Panels/ChangeSection';
+import ChangeSlider from './Panels/ChangeSlider';
 
 const AdminPanelContent: React.FC = () => {
   useEffect(() => {
@@ -18,6 +19,7 @@ const AdminPanelContent: React.FC = () => {
     adminPanelReducer.loadUnvalidatedComments();
     adminPanelReducer.getUsers();
     adminPanelReducer.getLessons();
+    adminPanelReducer.getSliders();
   }, []);
 
   return (
@@ -29,6 +31,7 @@ const AdminPanelContent: React.FC = () => {
       <ManageTimetable />
       <CreateSection />
       <ChangeSection />
+      <ChangeSlider />
     </>
   );
 };

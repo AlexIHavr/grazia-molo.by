@@ -62,7 +62,7 @@ const ChangePost: React.FC = () => {
             <FileInputContainer
               id="ChangePostPhoto"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                adminPanelReducer.uploadPostPhoto(e, 'ChangePost');
+                adminPanelReducer.uploadPhotos(e, 'ChangePost');
               }}
               onDelete={() => adminPanelReducer.deletePostPhoto()}
             ></FileInputContainer>

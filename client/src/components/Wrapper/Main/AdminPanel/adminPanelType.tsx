@@ -29,6 +29,10 @@ export type mainNavigationType = {
   withSubCategories: boolean;
 };
 
+export type sliderResponseType = {
+  photoNames: string[];
+};
+
 export type adminPanelType = {
   panels: panelType[];
   mainNavigation: mainNavigationType[];
@@ -36,6 +40,7 @@ export type adminPanelType = {
   comments: commentType[];
   users: usersResponseType;
   lessons: lessonsResponseType;
+  sliders: sliderResponseType[];
   changedSubCategories: navigationResponseType[];
   changedPost: postResponseType | null;
   changedCategories: navigationResponseType[];

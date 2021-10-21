@@ -1,8 +1,14 @@
 import React from 'react';
 import { makeAutoObservable } from 'mobx';
-import { adminApi, userApi } from '../../../../api/api';
+import { adminApi, userApi, visitorApi } from '../../../../api/api';
 import { postCommentsResponseType, postResponseType } from '../Forum/forumType';
-import { adminPanelType, commentType, userResponseType, usersResponseType } from './adminPanelType';
+import {
+  adminPanelType,
+  commentType,
+  sliderResponseType,
+  userResponseType,
+  usersResponseType,
+} from './adminPanelType';
 import timetableReducer from '../Timetable/timetableReducer';
 import { lessonResponseType } from '../Timetable/timetableType';
 import mainReducer from '../mainReducer';
@@ -53,6 +59,12 @@ class AdminPanelReducer {
       {
         _id: 'ChangeSection',
         section: 'Изменить раздел',
+        errorMessage: '',
+        successMessage: '',
+      },
+      {
+        _id: 'ChangeSlider',
+        section: 'Изменить слайдер',
         errorMessage: '',
         successMessage: '',
       },
@@ -111,6 +123,7 @@ class AdminPanelReducer {
     comments: [],
     users: [],
     lessons: [],
+    sliders: [],
     changedCategories: [],
     changedSubCategories: [],
     changedSection: null,
@@ -136,7 +149,7 @@ class AdminPanelReducer {
   }
 
   //показать успех при загрузке в браузер фото
-  uploadPostPhoto(e: React.ChangeEvent<HTMLInputElement>, selectedPanel: string) {
+  uploadPhotos(e: React.ChangeEvent<HTMLInputElement>, selectedPanel: string) {
     if (e.currentTarget.files.length) {
       const nameFiles = Array.from(e.currentTarget.files).reduce((message, file, i, arr) => {
         return (message += file.name + (i !== arr.length - 1 ? ', ' : ''));
@@ -396,6 +409,39 @@ class AdminPanelReducer {
       this.showSuccessMessage('Раздел успешно удален', 'ChangeSection');
     } catch (e) {
       this.showErrorMessage(e, 'ChangeSection');
+    }
+  }
+
+  //получить слайдеры
+  async getSliders() {
+    try {
+      const sliders = await visitorApi.get<sliderResponseType[]>('/getSliders');
+      this.state.sliders = sliders.data;
+    } catch (e: any) {
+      console.log(e.response?.data || e);
+    }
+  }
+
+  //изменить слайдер
+  async changeSlider(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      await adminApi.put('/changeSlider', new FormData(e.currentTarget));
+      this.showSuccessMessage('Слайдер изменен', 'ChangeSlider');
+    } catch (e) {
+      this.showErrorMessage(e, 'ChangeSlider');
+    }
+  }
+
+  //удаление фото слайдера
+  async deleteSliderPhoto(photoName: string) {
+    try {
+      await adminApi.delete('/deleteSliderPhoto', {
+        data: { photoName },
+      });
+      this.showSuccessMessage('Фото успешно удалено', 'ChangeSlider');
+    } catch (e) {
+      this.showErrorMessage(e, 'ChangeSlider');
     }
   }
 }

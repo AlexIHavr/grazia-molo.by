@@ -51,3 +51,7 @@ export type navigationModelType = {
   videoNames: string[];
   videoLinks: string[];
 } & Document;
+
+export type sliderModelType = {
+  photoNames: string[];
+} & Document;

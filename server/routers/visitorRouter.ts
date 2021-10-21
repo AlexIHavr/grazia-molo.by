@@ -4,6 +4,7 @@ import mailController from '../controllers/mailController';
 import timetableController from '../controllers/timetableController';
 import userController from '../controllers/userController';
 import validationMiddleware from '../middlewares/validationMiddleware';
+import sliderController from '../controllers/sliderController';
 
 const visitorRouter: Router = Router();
 
@@ -25,5 +26,6 @@ visitorRouter.get('/activate/:link', userController.activate);
 visitorRouter.get('/refresh', userController.refresh);
 visitorRouter.get('/getLessons', timetableController.getLessons);
 visitorRouter.get('/getNavigations', navigationController.getNavigations);
+visitorRouter.get('/getSliders', sliderController.getSliders);
 
 export default visitorRouter;

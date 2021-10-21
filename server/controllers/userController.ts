@@ -11,6 +11,7 @@ import {
 } from '../types/servicesTypes';
 import lessonModel from '../models/lessonModel';
 import fileService from '../services/fileService';
+import sliderModel from '../models/sliderModel';
 
 class UserController {
   async registration(

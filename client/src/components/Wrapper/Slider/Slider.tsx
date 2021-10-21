@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 
 import './sliderStyles.scss';
@@ -36,6 +36,10 @@ const Slider: React.FC = () => {
       );
     });
   };
+
+  useEffect(() => {
+    sliderReducer.getSliderFrames();
+  }, []);
 
   return (
     <div className="Slider">

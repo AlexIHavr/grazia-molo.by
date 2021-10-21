@@ -173,7 +173,7 @@ const ChangeSection: React.FC = () => {
                     <FileInputContainer
                       id="AddNewSectionPhotos"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        adminPanelReducer.uploadPostPhoto(e, 'ChangeSection');
+                        adminPanelReducer.uploadPhotos(e, 'ChangeSection');
                       }}
                       multiple={true}
                     ></FileInputContainer>

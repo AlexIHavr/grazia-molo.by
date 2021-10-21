@@ -102,3 +102,11 @@ export type deleteSectionPhotoRequestType = {
 export type deleteSectionRequestType = {
   sectionId: string;
 };
+
+export type changeSliderRequestType = {
+  photoNames: string[];
+};
+
+export type deleteSliderPhotoRequestType = {
+  photoName: string;
+};
