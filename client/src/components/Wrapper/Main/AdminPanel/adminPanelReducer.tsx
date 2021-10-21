@@ -15,68 +15,96 @@ class AdminPanelReducer {
   state: adminPanelType = {
     panels: [
       {
-        panel: 'CreatePost',
-        panelName: 'Создать пост',
+        _id: 'CreatePost',
+        section: 'Создать пост',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'ChangePost',
-        panelName: 'Изменить пост',
+        _id: 'ChangePost',
+        section: 'Изменить пост',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'ValidationComments',
-        panelName: 'Валидация комментариев',
+        _id: 'ValidationComments',
+        section: 'Валидация комментариев',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'BanUsers',
-        panelName: 'Блокирование пользователей',
+        _id: 'BanUsers',
+        section: 'Блокирование пользователей',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'ManageTimetable',
-        panelName: 'Управление расписанием',
+        _id: 'ManageTimetable',
+        section: 'Управление расписанием',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'CreateSection',
-        panelName: 'Создать раздел',
+        _id: 'CreateSection',
+        section: 'Создать раздел',
         errorMessage: '',
         successMessage: '',
       },
       {
-        panel: 'ChangeSection',
-        panelName: 'Изменить раздел',
+        _id: 'ChangeSection',
+        section: 'Изменить раздел',
         errorMessage: '',
         successMessage: '',
       },
     ],
-    changeableNavigations: [
+    mainNavigation: [
       {
         _id: 'MainPage',
         name: 'Главная',
+        changeable: true,
+        withSubCategories: false,
       },
       {
         _id: 'Dances',
         name: 'Танцы',
+        changeable: true,
+        withSubCategories: false,
+      },
+      {
+        _id: 'Timetable',
+        name: 'Расписание',
+        changeable: false,
+        withSubCategories: false,
       },
       {
         _id: 'Events',
         name: 'События',
+        changeable: true,
+        withSubCategories: true,
       },
       {
         _id: 'Creativity',
         name: 'Творчество',
+        changeable: true,
+        withSubCategories: true,
       },
       {
         _id: 'History',
         name: 'История',
+        changeable: true,
+        withSubCategories: false,
+      },
+      {
+        _id: 'Forum',
+        name: 'Форум',
+        changeable: false,
+        withSubCategories: false,
+      },
+      {
+        _id: 'Contacts',
+        name: 'Контакты',
+        changeable: false,
+        withSubCategories: false,
       },
     ],
     posts: [],
@@ -93,7 +121,7 @@ class AdminPanelReducer {
 
   //показать ошибки
   showErrorMessage(e: any, selectedPanel: string) {
-    const panel = this.state.panels.find(({ panel }) => panel === selectedPanel);
+    const panel = this.state.panels.find(({ _id }) => _id === selectedPanel);
 
     panel.errorMessage = e.response?.data?.message || e.message;
     panel.successMessage = '';
@@ -101,7 +129,7 @@ class AdminPanelReducer {
 
   //показать успешные сообщения
   showSuccessMessage(message: string, selectedPanel: string) {
-    const panel = this.state.panels.find(({ panel }) => panel === selectedPanel);
+    const panel = this.state.panels.find(({ _id }) => _id === selectedPanel);
 
     panel.successMessage = message;
     panel.errorMessage = '';
@@ -300,7 +328,7 @@ class AdminPanelReducer {
     }
   }
 
-  //создание события
+  //создание раздела
   async createSection(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -312,7 +340,7 @@ class AdminPanelReducer {
     }
   }
 
-  //изменение категории
+  //изменение раздела
   async changeSection(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
@@ -323,7 +351,7 @@ class AdminPanelReducer {
     }
   }
 
-  //выбор событий выбранного года
+  //выбор изменяемых подкатегорий
   selectChangedSubCategories(selectSubCategory: string) {
     this.state.changedSubCategories = this.state.changedCategories.filter(
       ({ subCategory }) => subCategory === selectSubCategory
@@ -338,13 +366,11 @@ class AdminPanelReducer {
 
   //выбор изменяемой категории
   selectChangedCategory(selectCategory: string) {
-    this.state.changedCategories = mainReducer.state.navigations.filter(
-      ({ category }) => category === selectCategory
-    );
+    this.state.changedCategories = mainReducer.getCategoryNavigations(selectCategory);
     this.state.changedSubCategories = [];
   }
 
-  //выбор раздела
+  //выбор изменяемого раздела
   selectChangedSection(id: string) {
     this.state.changedSection = this.state.changedSubCategories.find(({ _id }) => _id === id);
   }

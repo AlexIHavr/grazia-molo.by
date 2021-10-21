@@ -4,7 +4,7 @@ import userController from '../controllers/userController';
 import timetableController from '../controllers/timetableController';
 import multerMiddleware from '../middlewares/multerMiddleware';
 import validationMiddleware from '../middlewares/validationMiddleware';
-import eventController from '../controllers/navigationController';
+import navigationController from '../controllers/navigationController';
 
 const adminRouter: Router = Router();
 
@@ -21,7 +21,7 @@ adminRouter.post(
   '/createSection',
   multerMiddleware('category', 'subCategory'),
   validationMiddleware(['section', 'subCategory']),
-  eventController.createSection
+  navigationController.createSection
 );
 
 adminRouter.put(
@@ -34,15 +34,15 @@ adminRouter.put(
   '/changeSection',
   multerMiddleware('category', 'oldSubCategory', 'subCategory'),
   validationMiddleware(['section', 'subCategory']),
-  eventController.changeSection
+  navigationController.changeSection
 );
 adminRouter.put('/changeIsValidatedComments', postController.changeIsValidateComments);
 adminRouter.put('/changeIsBanUsers', userController.changeIsBanUsers);
 adminRouter.put('/changeTimetable', timetableController.changeTimetable);
 
 adminRouter.delete('/deletePostPhoto', postController.deletePostPhoto);
-adminRouter.delete('/deleteSectionPhoto', eventController.deleteSectionPhoto);
+adminRouter.delete('/deleteSectionPhoto', navigationController.deleteSectionPhoto);
 adminRouter.delete('/deletePost', postController.deletePost);
-adminRouter.delete('/deleteSection', eventController.deleteSection);
+adminRouter.delete('/deleteSection', navigationController.deleteSection);
 
 export default adminRouter;

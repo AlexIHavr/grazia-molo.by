@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx';
-import React from 'react';
+import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 import { visitorApi } from '../../../api/api';
 import config from '../../../config/config';
-import { videoType } from './Events/eventsType';
 
 import { mainType, navigationResponseType } from './mainType';
 
@@ -24,6 +24,7 @@ class MainReducer {
     iSelectedItem: 0,
     currentPage: window.location.href.split('/')[3] || 'MainPage',
     navigations: [],
+    imagesUrl: process.env.PUBLIC_URL + '/Images/Wrapper/Main/',
     settings: {
       offsetNavScroll: 250, //смещение навигации при появление ее прокрутки (стрелок)
       addOffsetContentScroll: 10, //дополнительный отступ контента при активации навигации
@@ -104,7 +105,7 @@ class MainReducer {
 
   //перемещение на границы навигации контента при нажатии на стрелки
   scrollNavContentToDirection(direction: 'Up' | 'Down' | 'WithContent') {
-    const navContent = this.state.refContent.current;
+    const navContent = this.state.refNavContent.current;
 
     switch (direction) {
       case 'Up':
@@ -136,43 +137,107 @@ class MainReducer {
     window.scrollTo(0, 0);
   }
 
-  //получение простой навигации контента безссылочных разделов
-  getSimpleNavContent(nav: any[], title: string) {
-    return nav.map((value, i, nav) => {
+  //получение навигации контента разделов без покатегорий
+  getSectionNavContentWithoutSubCategories(currentNavigations?: any[]) {
+    const categoryNavigations =
+      currentNavigations || this.getCategoryNavigations(this.state.currentPage);
+
+    return categoryNavigations.map(({ _id, section }, i) => {
       return (
         <div
-          key={value[title]}
+          key={_id}
           className={this.state.iSelectedItem === i ? 'active' : ''}
           onClick={() => {
             this.setISelectedItem(i);
-            this.moveToSelectedItem(this.state.refContent, nav[this.state.iSelectedItem][title]);
+            this.moveToSelectedItem(
+              this.state.refContent,
+              categoryNavigations[this.state.iSelectedItem]._id
+            );
           }}
-          data-selected={this.state.iSelectedItem === i ? nav[this.state.iSelectedItem][title] : ''}
+          data-selected={
+            this.state.iSelectedItem === i ? categoryNavigations[this.state.iSelectedItem]._id : ''
+          }
         >
-          {value[title + 'Name'] !== undefined ? value[title + 'Name'] : value[title]}
+          {section}
         </div>
       );
     });
   }
 
-  //получение описания раздела
-  getDescription(description: string[]) {
-    return (
-      <div className="Description">
-        {description.map((text) => {
-          return <div key={text}>{text}</div>;
-        })}
-      </div>
-    );
+  //получение навигации контента разделов с покатегориями
+  getSectionNavContentWithSubCategories(currentSubCategory: string) {
+    const categoryNavigations = this.getCategoryNavigations(this.state.currentPage);
+
+    return this.getUniqueSubCategories(categoryNavigations).map((uniqueSubCategory) => {
+      return (
+        <Fragment key={uniqueSubCategory}>
+          <NavLink to={`/${this.state.currentPage}/${uniqueSubCategory}`}>
+            {uniqueSubCategory}
+          </NavLink>
+
+          {currentSubCategory === uniqueSubCategory
+            ? categoryNavigations
+                .filter((e) => e.subCategory === currentSubCategory)
+                .map((e) => {
+                  return (
+                    <NavLink
+                      key={e._id}
+                      to={`/${this.state.currentPage}/${uniqueSubCategory}/${e._id}`}
+                      className="Sections"
+                    >
+                      {e.section}
+                    </NavLink>
+                  );
+                })
+            : ''}
+        </Fragment>
+      );
+    });
+  }
+
+  //получение контента раздела
+  getSectionContent(sectionId?: string) {
+    if (this.state.navigations.length) {
+      const selectedSection = sectionId
+        ? [this.state.navigations.find(({ _id }) => _id === sectionId)]
+        : this.getCategoryNavigations(this.state.currentPage);
+
+      return selectedSection.map(
+        ({ _id, subCategory, section, description, photoNames, videoNames, videoLinks }) => {
+          return (
+            <div key={_id} data-selected={_id}>
+              <h3>{section}</h3>
+
+              <div className="Description">
+                {description.map((text) => (
+                  <div key={text}>{text}</div>
+                ))}
+              </div>
+
+              {this.getImages(photoNames, subCategory)}
+              {this.getVideo(videoNames, videoLinks)}
+            </div>
+          );
+        }
+      );
+    }
   }
 
   //получение картинок
-  getImages(images: string[], baseUrl: string) {
-    if (images) {
+  getImages(photoNames: string[], subCategory: string) {
+    if (photoNames.length) {
       return (
         <div className="ContentImages">
-          {images.map((image) => {
-            return <img key={image} src={baseUrl + '/' + image} alt="Картинка не загрузилась" />;
+          {photoNames.map((photoName) => {
+            return (
+              <img
+                key={photoName}
+                src={`${this.state.imagesUrl}${this.state.currentPage}/${
+                  subCategory ? subCategory + '/' : ''
+                }${photoName}`}
+                alt="Картинка не загрузилась"
+              />
+            );
           })}
         </div>
       );
@@ -180,17 +245,17 @@ class MainReducer {
   }
 
   //получение видео
-  getVideo(videos: videoType[]) {
-    if (videos) {
+  getVideo(videoNames: string[], videoLinks: string[]) {
+    if (videoNames.length) {
       return (
         <div className="ContentVideos">
-          {videos.map((video) => {
+          {videoNames.map((videoName, i) => {
             return (
-              <div key={video.url}>
-                <h3>{video.name}</h3>
+              <div key={videoLinks[i]}>
+                <h3>{videoName}</h3>
                 <iframe
                   className="video"
-                  src={config.VIDEO_URL + video.url}
+                  src={config.VIDEO_URL + videoLinks[i]}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -201,20 +266,6 @@ class MainReducer {
         </div>
       );
     }
-  }
-
-  //получение простого контента
-  getSimpleContent(content: any[], title: string, imagesUrl?: string, noDir?: 'noDir') {
-    return content.map((value) => {
-      return (
-        <div key={value[title]} data-selected={value[title]}>
-          <h3>{value[title + 'Name'] !== undefined ? value[title + 'Name'] : value[title]}</h3>
-          {this.getDescription(value.description)}
-          {this.getImages(value.images, imagesUrl + (!noDir ? value[title] : ''))}
-          {this.getVideo(value.videos)}
-        </div>
-      );
-    });
   }
 
   //установка текущей страницы при клике на меню
@@ -267,9 +318,14 @@ class MainReducer {
     }
   }
 
+  //получение навигаций для категории
+  getCategoryNavigations(currentCategory: string) {
+    return this.state.navigations.filter(({ category }) => category === currentCategory);
+  }
+
   //получение уникальных подкатегорий
   getUniqueSubCategories(categories: navigationResponseType[]) {
-    return categories.reduce((uniqueArr, category) => {
+    return categories.reduce<string[]>((uniqueArr, category) => {
       if (!uniqueArr.includes(category.subCategory)) uniqueArr.push(category.subCategory);
       return uniqueArr;
     }, []);

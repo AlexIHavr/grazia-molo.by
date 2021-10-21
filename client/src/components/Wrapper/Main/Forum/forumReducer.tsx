@@ -31,7 +31,7 @@ class ForumReducer {
 
       this.state.posts = posts.data.map((post) => {
         return Object.assign(post, {
-          _idName: post.name,
+          section: post.name,
           showComments: false,
           showCreateComment: false,
           showThanksComment: false,

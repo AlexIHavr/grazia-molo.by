@@ -13,7 +13,7 @@ const multerMiddleware = (baseDir: string, addDir?: string, renameDir?: string) 
 
         //создание доп. папки
         if (addDir) {
-          dir = `${req.body[baseDir]}/${req.body[addDir]}`;
+          dir = `${req.body[baseDir]}/${req.body[addDir] ?? ''}`;
 
           //переименование существующей папки
           if (renameDir) {

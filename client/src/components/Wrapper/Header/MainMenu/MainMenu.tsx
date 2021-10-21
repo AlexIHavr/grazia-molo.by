@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import './mainMenuStyles.scss';
 
 import mainReducer from '../../Main/mainReducer';
+import adminPanelReducer from '../../Main/AdminPanel/adminPanelReducer';
 
 const MainMenu: React.FC = () => {
   return (
@@ -21,16 +22,17 @@ const MainMenu: React.FC = () => {
         className={'MainMenu ' + (mainReducer.state.activateMainMenu ? 'activateMainMenu' : '')}
         onClick={(e) => mainReducer.setCurrentPage(e)}
       >
-        <NavLink to="/" exact>
-          Главная
-        </NavLink>
-        <NavLink to="/Dances">Танцы</NavLink>
-        <NavLink to="/Timetable">Расписание</NavLink>
-        <NavLink to="/Events">События</NavLink>
-        <NavLink to="/Creativity">Творчество</NavLink>
-        <NavLink to="/History">История</NavLink>
-        <NavLink to="/Forum">Форум</NavLink>
-        <NavLink to="/Contacts">Контакты</NavLink>
+        {adminPanelReducer.state.mainNavigation.map(({ _id, name }) => {
+          return _id === 'MainPage' ? (
+            <NavLink key={_id} to={`/`} exact>
+              {name}
+            </NavLink>
+          ) : (
+            <NavLink key={_id} to={`/${_id}`}>
+              {name}
+            </NavLink>
+          );
+        })}
       </div>
     </>
   );

@@ -3,8 +3,8 @@ import { navigationResponseType } from '../mainType';
 import { lessonsResponseType } from '../Timetable/timetableType';
 
 type panelType = {
-  panel: string;
-  panelName: string;
+  _id: string;
+  section: string;
   errorMessage: string;
   successMessage: string;
 };
@@ -22,14 +22,16 @@ export type userResponseType = {
 
 export type usersResponseType = userResponseType[];
 
-export type changeableNavigationType = {
+export type mainNavigationType = {
   _id: string;
   name: string;
+  changeable: boolean;
+  withSubCategories: boolean;
 };
 
 export type adminPanelType = {
   panels: panelType[];
-  changeableNavigations: changeableNavigationType[];
+  mainNavigation: mainNavigationType[];
   posts: postResponseType[];
   comments: commentType[];
   users: usersResponseType;

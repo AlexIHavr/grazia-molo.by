@@ -7,7 +7,7 @@ import timetableReducer from '../../Timetable/timetableReducer';
 const ManageTimetable: React.FC = () => {
   const state = adminPanelReducer.state;
 
-  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'ManageTimetable');
+  const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'ManageTimetable');
 
   const getLessons = (day: string) => {
     return state.lessons.map((lesson, i) => {
@@ -42,13 +42,13 @@ const ManageTimetable: React.FC = () => {
   };
 
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.changeTimetable(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
         <div className="Timetable">
           {timetableReducer.state.days.map((day) => {
             return (

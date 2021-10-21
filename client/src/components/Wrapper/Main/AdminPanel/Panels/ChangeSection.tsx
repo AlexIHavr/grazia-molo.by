@@ -3,24 +3,23 @@ import { observer } from 'mobx-react';
 import preloaderReducer from '../../../Windows/Preloader/preloaderReducer';
 import adminPanelReducer from '../adminPanelReducer';
 import Select from '../../../../JSXElements/Select/Select';
-import eventsReducer from '../../Events/eventsReducer';
 import FileInputContainer from '../../../../JSXElements/FileInputContainer/FileInputContainer';
 import mainReducer from '../../mainReducer';
 
 const ChangeSection: React.FC = () => {
   const state = adminPanelReducer.state;
 
-  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'ChangeSection');
+  const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'ChangeSection');
   const changedSection = state.changedSection;
 
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.changeSection(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
 
         <label htmlFor="ChooseNavigations">Изменяемая категория</label>
         <div className="InputContainer">
@@ -28,7 +27,9 @@ const ChangeSection: React.FC = () => {
           <Select
             inputName="category"
             onSelect={adminPanelReducer.selectChangedCategory.bind(adminPanelReducer)}
-            options={state.changeableNavigations.map(({ _id, name }) => ({ _id, name }))}
+            options={state.mainNavigation
+              .filter(({ changeable }) => changeable)
+              .map(({ _id, name }) => ({ _id, name }))}
             defaultTitle="Выберите категорию"
           ></Select>
         </div>
@@ -71,6 +72,14 @@ const ChangeSection: React.FC = () => {
 
                 {changedSection ? (
                   <>
+                    <label htmlFor="NewCategoryDescription">Описание категории</label>
+                    <textarea
+                      id="NewCategoryDescription"
+                      name="startDescription"
+                      placeholder="Введите описание категории"
+                      defaultValue={changedSection.startDescription}
+                    />
+
                     <label htmlFor="NewSubCategory">Имя подкатегории</label>
                     <div className="InputContainer">
                       <i className="fas fa-marker"></i>
@@ -136,12 +145,11 @@ const ChangeSection: React.FC = () => {
                             return (
                               <div key={photoName}>
                                 <img
-                                  src={
-                                    eventsReducer.state.imagesUrl +
-                                    changedSection.subCategory +
-                                    '/' +
-                                    photoName
-                                  }
+                                  src={`${mainReducer.state.imagesUrl}${changedSection.category}/${
+                                    changedSection.subCategory
+                                      ? changedSection.subCategory + '/'
+                                      : ''
+                                  }${photoName}`}
                                   alt="Картинка не загрузилась"
                                 />
                                 <button
@@ -188,7 +196,7 @@ const ChangeSection: React.FC = () => {
                       className="button"
                       disabled={preloaderReducer.state.activatePreloader}
                     >
-                      {adminPanel.panelName}
+                      {adminPanel.section}
                     </button>
                   </>
                 ) : (

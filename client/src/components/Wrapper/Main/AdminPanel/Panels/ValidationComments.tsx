@@ -8,15 +8,15 @@ import forumReducer from '../../Forum/forumReducer';
 const ValidationComments: React.FC = () => {
   const state = adminPanelReducer.state;
 
-  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'ValidationComments');
+  const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'ValidationComments');
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.changeIsValidatedComments(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
         <div className="PostComments">
           {state.comments.map((comment) => {
             return (

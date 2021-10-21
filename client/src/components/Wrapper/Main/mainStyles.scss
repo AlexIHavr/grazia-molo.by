@@ -81,6 +81,10 @@ main {
     flex-grow: 1;
     overflow-y: scroll;
 
+    .Sections {
+      width: 60%;
+    }
+
     & > * {
       position: relative;
       padding: 10px;
@@ -91,7 +95,8 @@ main {
       margin-bottom: 10px;
 
       &:not(.active) {
-        border: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        border-top: 2px solid transparent;
       }
     }
 

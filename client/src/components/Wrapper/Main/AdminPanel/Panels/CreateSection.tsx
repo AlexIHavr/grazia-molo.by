@@ -4,19 +4,23 @@ import preloaderReducer from '../../../Windows/Preloader/preloaderReducer';
 import adminPanelReducer from '../adminPanelReducer';
 import FileInputContainer from '../../../../JSXElements/FileInputContainer/FileInputContainer';
 import Select from '../../../../JSXElements/Select/Select';
+import mainReducer from '../../mainReducer';
 
 const CreateSection: React.FC = () => {
   const state = adminPanelReducer.state;
-  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'CreateSection');
+  const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'CreateSection');
+  const withSubCategory = adminPanelReducer.state.mainNavigation.find(
+    ({ _id }) => _id === state.selectedCategory
+  )?.withSubCategories;
 
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.createSection(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
 
         <label htmlFor="ChooseNavigation">Изменяемая категория</label>
         <div className="InputContainer">
@@ -24,23 +28,45 @@ const CreateSection: React.FC = () => {
           <Select
             inputName="category"
             onSelect={adminPanelReducer.selectCategory.bind(adminPanelReducer)}
-            options={state.changeableNavigations.map(({ _id, name }) => ({ _id, name }))}
+            options={state.mainNavigation
+              .filter(({ changeable }) => changeable)
+              .map(({ _id, name }) => ({ _id, name }))}
             defaultTitle="Выберите категорию"
           ></Select>
         </div>
 
         {state.selectedCategory ? (
           <>
-            <label htmlFor="SubCategory">Имя подкатегории</label>
-            <div className="InputContainer">
-              <i className="fas fa-folder-open"></i>
-              <input
-                id="SubCategory"
-                name="subCategory"
-                type="text"
-                placeholder="Введите имя подкатегории"
-              />
-            </div>
+            {withSubCategory &&
+            !mainReducer.getCategoryNavigations(state.selectedCategory).length ? (
+              <>
+                <label htmlFor="CategoryDescription">Описание категории</label>
+                <textarea
+                  id="CategoryDescription"
+                  name="startDescription"
+                  placeholder="Введите описание категории"
+                />
+              </>
+            ) : (
+              ''
+            )}
+
+            {withSubCategory ? (
+              <>
+                <label htmlFor="SubCategory">Имя подкатегории</label>
+                <div className="InputContainer">
+                  <i className="fas fa-folder-open"></i>
+                  <input
+                    id="SubCategory"
+                    name="subCategory"
+                    type="text"
+                    placeholder="Введите имя подкатегории"
+                  />
+                </div>
+              </>
+            ) : (
+              ''
+            )}
 
             <label htmlFor="SectionName">Имя раздела</label>
             <div className="InputContainer">
@@ -99,7 +125,7 @@ const CreateSection: React.FC = () => {
               className="button"
               disabled={preloaderReducer.state.activatePreloader}
             >
-              {adminPanel.panelName}
+              {adminPanel.section}
             </button>
           </>
         ) : (

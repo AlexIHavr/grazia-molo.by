@@ -17,7 +17,7 @@ class TokenService {
       expiresIn: config.get('TIME_JWT_REFRESH'),
     });
 
-    const user: userModelType | null = await userModel.findById(payload.userId);
+    const user = await userModel.findById(payload.userId);
 
     if (!user) {
       throw ApiError.BadRequest('Пользователь не найден');

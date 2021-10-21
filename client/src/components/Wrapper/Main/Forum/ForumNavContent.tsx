@@ -12,7 +12,7 @@ const ForumNavContent: React.FC = () => {
       {!state.posts.length || !loginReducer.state.isAuth ? (
         <div className="active">Форум</div>
       ) : (
-        mainReducer.getSimpleNavContent(state.posts, '_id')
+        mainReducer.getSectionNavContentWithoutSubCategories(state.posts)
       )}
     </>
   );

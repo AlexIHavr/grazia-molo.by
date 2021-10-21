@@ -13,6 +13,7 @@ export type navigationResponseType = {
   category: string;
   subCategory: string;
   section: string;
+  startDescription: string[];
   description: string[];
   photoNames: string[];
   videoNames: string[];
@@ -32,5 +33,6 @@ export type mainType = {
   iSelectedItem: number;
   currentPage: string;
   navigations: navigationResponseType[];
+  imagesUrl: string;
   settings: settingsType;
 };

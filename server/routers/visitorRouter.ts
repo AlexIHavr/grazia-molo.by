@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import eventController from '../controllers/navigationController';
+import navigationController from '../controllers/navigationController';
 import mailController from '../controllers/mailController';
 import timetableController from '../controllers/timetableController';
 import userController from '../controllers/userController';
@@ -24,6 +24,6 @@ visitorRouter.post('/logout', userController.logout);
 visitorRouter.get('/activate/:link', userController.activate);
 visitorRouter.get('/refresh', userController.refresh);
 visitorRouter.get('/getLessons', timetableController.getLessons);
-visitorRouter.get('/getNavigations', eventController.getNavigations);
+visitorRouter.get('/getNavigations', navigationController.getNavigations);
 
 export default visitorRouter;

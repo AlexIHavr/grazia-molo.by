@@ -9,17 +9,17 @@ import forumReducer from '../../Forum/forumReducer';
 const ChangePost: React.FC = () => {
   const state = adminPanelReducer.state;
 
-  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'ChangePost');
+  const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'ChangePost');
   const changedPost = state.changedPost;
 
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.changePost(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
         <label htmlFor="ChoosePost">Изменяемый пост</label>
         <div className="InputContainer">
           <i className="fas fa-clipboard"></i>
@@ -82,7 +82,7 @@ const ChangePost: React.FC = () => {
               className="button"
               disabled={preloaderReducer.state.activatePreloader}
             >
-              {adminPanel.panelName}
+              {adminPanel.section}
             </button>
           </>
         ) : (

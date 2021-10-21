@@ -26,7 +26,7 @@ export type postCommentResponseType = {
 export type postCommentsResponseType = postCommentResponseType[];
 
 export type postType = {
-  _idName: string; //для навигации
+  section: string; //для навигации
   showComments: boolean;
   showCreateComment: boolean;
   showThanksComment: boolean;

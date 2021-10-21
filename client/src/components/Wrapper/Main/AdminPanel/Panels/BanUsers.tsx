@@ -8,16 +8,16 @@ import forumReducer from '../../Forum/forumReducer';
 const BanUsers: React.FC = () => {
   const state = adminPanelReducer.state;
 
-  const adminPanel = state.panels.find((adminPanel) => adminPanel.panel === 'BanUsers');
+  const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'BanUsers');
 
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.changeIsBanUsers(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
         <div className="PostComments">
           {state.users.map((user) => {
             return (

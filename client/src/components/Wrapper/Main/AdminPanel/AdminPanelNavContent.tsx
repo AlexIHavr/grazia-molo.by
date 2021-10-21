@@ -4,9 +4,9 @@ import adminPanelReducer from './adminPanelReducer';
 import mainReducer from '../mainReducer';
 
 const AdminPanelNavContent: React.FC = () => {
-  const state = adminPanelReducer.state;
-
-  return <>{mainReducer.getSimpleNavContent(state.panels, 'panel')}</>;
+  return (
+    <>{mainReducer.getSectionNavContentWithoutSubCategories(adminPanelReducer.state.panels)}</>
+  );
 };
 
 export default observer(AdminPanelNavContent);

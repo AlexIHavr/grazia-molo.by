@@ -14,6 +14,7 @@ class NavigationService {
     category,
     subCategory,
     section,
+    startDescription,
     description,
     photoNames,
     videoNames,
@@ -26,15 +27,26 @@ class NavigationService {
       throw ApiError.BadRequest('Количество имен и ссылок видео не совпадают');
     }
 
-    await navigationModel.create({
+    const newSection = await navigationModel.create({
       category,
-      subCategory,
+      subCategory: subCategory ?? '',
       section,
       description: textService.getTextArr(description, '\n'),
       photoNames,
       videoNames: videoNamesArr,
       videoLinks: videoLinksArr,
     });
+
+    const categoryNavigation = await navigationModel.find({ category });
+
+    if (categoryNavigation.length === 1) {
+      newSection.startDescription = textService.getTextArr(startDescription, '\n');
+    } else {
+      newSection.startDescription = categoryNavigation.filter(
+        ({ startDescription }) => startDescription
+      )[0].startDescription;
+    }
+    await newSection.save();
   }
 
   async getNavigations() {
@@ -45,6 +57,7 @@ class NavigationService {
     sectionId,
     subCategory,
     section,
+    startDescription,
     description,
     photoNames,
     videoNames,
@@ -70,6 +83,13 @@ class NavigationService {
       photoNames: oldSection.photoNames.concat(photoNames),
       videoNames: videoNamesArr,
       videoLinks: videoLinksArr,
+    });
+
+    const categoryNavigation = await navigationModel.find({ category: oldSection.category });
+
+    categoryNavigation.forEach(async (nav) => {
+      nav.startDescription = textService.getTextArr(startDescription, '\n');
+      await nav.save();
     });
   }
 

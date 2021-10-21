@@ -6,17 +6,17 @@ import FileInputContainer from '../../../../JSXElements/FileInputContainer/FileI
 
 const CreatePost: React.FC = () => {
   const adminPanel = adminPanelReducer.state.panels.find(
-    (adminPanel) => adminPanel.panel === 'CreatePost'
+    (adminPanel) => adminPanel._id === 'CreatePost'
   );
 
   return (
-    <div className={adminPanel.panel + ' window'} data-selected={adminPanel.panel}>
+    <div className={adminPanel._id + ' window'} data-selected={adminPanel._id}>
       <form
         onSubmit={(e) => {
           adminPanelReducer.createPost(e);
         }}
       >
-        <h1>{adminPanel.panelName}</h1>
+        <h1>{adminPanel.section}</h1>
         <label htmlFor="PostName">Имя поста</label>
         <div className="InputContainer">
           <i className="fas fa-pencil-alt"></i>
@@ -37,7 +37,7 @@ const CreatePost: React.FC = () => {
           className="button"
           disabled={preloaderReducer.state.activatePreloader}
         >
-          {adminPanel.panelName}
+          {adminPanel.section}
         </button>
       </form>
     </div>

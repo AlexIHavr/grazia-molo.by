@@ -5,6 +5,7 @@ const navigationModel = new Schema({
   category: { type: String, require: true },
   subCategory: { type: String },
   section: { type: String },
+  startDescription: [String],
   description: [String],
   photoNames: [String],
   videoNames: [String],

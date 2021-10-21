@@ -45,6 +45,7 @@ export type navigationModelType = {
   category: string;
   subCategory: string;
   section: string;
+  startDescription: string[];
   description: string[];
   photoNames: string[];
   videoNames: string[];

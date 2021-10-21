@@ -2,23 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { observer } from 'mobx-react';
 
-import MainPageContent from './MainPage/MainPageContent';
-import MainPageNavContent from './MainPage/MainPageNavContent';
-
-import DancesContent from './Dances/DancesContent';
-import DancesNavContent from './Dances/DancesNavContent';
-
 import TimetableContent from './Timetable/TimetableContent';
 import TimetableNavContent from './Timetable/TimetableNavContent';
-
-import EventsContent from './Events/EventsContent';
-import EventsNavContent from './Events/EventsNavContent';
-
-import CreativityNavContent from './Creativity/CreativityNavContent';
-import CreativityContent from './Creativity/CreativityContent';
-
-import HistoryNavContent from './History/HistoryNavContent';
-import HistoryContent from './History/HistoryContent';
 
 import ForumNavContent from './Forum/ForumNavContent';
 import ForumContent from './Forum/ForumContent';
@@ -35,6 +20,7 @@ import mainReducer from './mainReducer';
 
 import './mainStyles.scss';
 import loginReducer from '../Windows/Login/loginReducer';
+import adminPanelReducer from './AdminPanel/adminPanelReducer';
 
 const Main: React.FC = () => {
   const state = mainReducer.state;
@@ -55,6 +41,9 @@ const Main: React.FC = () => {
 
       if (window.innerWidth < state.settings.adaptiveWidth1) {
         mainReducer.toogleIMoveUpDocumentOnScroll();
+      } else if (state.currentPage === 'MainPage') {
+        //фиксирование навигации главной страницы после слайдера
+        mainReducer.fixedNavMainPageOnScroll();
       }
     });
 
@@ -98,14 +87,31 @@ const Main: React.FC = () => {
         onScroll={() => mainReducer.activateNavContentScrollArrows(refNavContent)}
       >
         <Switch>
-          <Route path="/" component={MainPageNavContent} exact />
-          <Route path="/Dances" component={DancesNavContent} exact />
+          {/* неизменяемые страницы сайта */}
           <Route path="/Timetable" component={TimetableNavContent} exact />
-          <Route path="/Events/:year?/:event?" component={EventsNavContent} exact />
-          <Route path="/Creativity/:creation?" component={CreativityNavContent} exact />
-          <Route path="/History" component={HistoryNavContent} exact />
           <Route path="/Forum" component={ForumNavContent} exact />
           <Route path="/Contacts" component={ContactsNavContent} exact />
+
+          {/* изменяемые страницы сайта */}
+          {state.iSelectedItem >= 0
+            ? adminPanelReducer.state.mainNavigation
+                .filter(({ changeable }) => changeable)
+                .map(({ _id, withSubCategories }) => {
+                  return (
+                    <Route
+                      key={_id}
+                      path={`/${_id === 'MainPage' ? '' : _id}/:subCategory?/:section?`}
+                      render={({ match }) => {
+                        const { subCategory } = match.params;
+                        return withSubCategories
+                          ? mainReducer.getSectionNavContentWithSubCategories(subCategory)
+                          : mainReducer.getSectionNavContentWithoutSubCategories();
+                      }}
+                      exact
+                    />
+                  );
+                })
+            : ''}
 
           {/* панель администратора */}
           {loginReducer.state.isAuth && loginReducer.state.userData.roles.includes('ADMIN') ? (
@@ -118,14 +124,43 @@ const Main: React.FC = () => {
 
       <div ref={refContent} className={'Content ' + state.currentPage}>
         <Switch>
-          <Route path="/" component={MainPageContent} exact />
-          <Route path="/Dances" component={DancesContent} exact />
+          {/* неизменяемые страницы сайта */}
           <Route path="/Timetable" component={TimetableContent} exact />
-          <Route path="/Events/:year?/:event?" component={EventsContent} exact />
-          <Route path="/Creativity/:creation?" component={CreativityContent} exact />
-          <Route path="/History" component={HistoryContent} exact />
           <Route path="/Forum" component={ForumContent} exact />
           <Route path="/Contacts" component={ContactsContent} exact />
+
+          {/* изменяемые страницы сайта */}
+          {adminPanelReducer.state.mainNavigation
+            .filter(({ changeable }) => changeable)
+            .map(({ _id, withSubCategories }) => {
+              return (
+                <Route
+                  key={_id}
+                  path={`/${_id === 'MainPage' ? '' : _id}/:subCategory?/:section?`}
+                  render={({ match }) => {
+                    const { subCategory, section } = match.params;
+                    return withSubCategories ? (
+                      subCategory !== undefined && section !== undefined ? (
+                        mainReducer.getSectionContent(section)
+                      ) : (
+                        <div className="Description">
+                          {mainReducer.getCategoryNavigations(state.currentPage).length
+                            ? mainReducer
+                                .getCategoryNavigations(state.currentPage)[0]
+                                .startDescription.map((value) => {
+                                  return <div>{value}</div>;
+                                })
+                            : ''}
+                        </div>
+                      )
+                    ) : (
+                      mainReducer.getSectionContent()
+                    );
+                  }}
+                  exact
+                />
+              );
+            })}
 
           {/* панель администратора */}
           {loginReducer.state.isAuth && loginReducer.state.userData.roles.includes('ADMIN') ? (
