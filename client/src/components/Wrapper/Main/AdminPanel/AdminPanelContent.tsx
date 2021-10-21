@@ -24,14 +24,14 @@ const AdminPanelContent: React.FC = () => {
 
   return (
     <>
+      <CreateSection />
+      <ChangeSection />
+      <ChangeSlider />
+      <ManageTimetable />
       <CreatePost />
       <ChangePost />
       <ValidationComments />
       <BanUsers />
-      <ManageTimetable />
-      <CreateSection />
-      <ChangeSection />
-      <ChangeSlider />
     </>
   );
 };

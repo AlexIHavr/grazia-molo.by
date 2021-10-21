@@ -21,6 +21,30 @@ class AdminPanelReducer {
   state: adminPanelType = {
     panels: [
       {
+        _id: 'CreateSection',
+        section: 'Создать раздел',
+        errorMessage: '',
+        successMessage: '',
+      },
+      {
+        _id: 'ChangeSection',
+        section: 'Изменить раздел',
+        errorMessage: '',
+        successMessage: '',
+      },
+      {
+        _id: 'ChangeSlider',
+        section: 'Изменить слайдер',
+        errorMessage: '',
+        successMessage: '',
+      },
+      {
+        _id: 'ManageTimetable',
+        section: 'Управление расписанием',
+        errorMessage: '',
+        successMessage: '',
+      },
+      {
         _id: 'CreatePost',
         section: 'Создать пост',
         errorMessage: '',
@@ -41,30 +65,6 @@ class AdminPanelReducer {
       {
         _id: 'BanUsers',
         section: 'Блокирование пользователей',
-        errorMessage: '',
-        successMessage: '',
-      },
-      {
-        _id: 'ManageTimetable',
-        section: 'Управление расписанием',
-        errorMessage: '',
-        successMessage: '',
-      },
-      {
-        _id: 'CreateSection',
-        section: 'Создать раздел',
-        errorMessage: '',
-        successMessage: '',
-      },
-      {
-        _id: 'ChangeSection',
-        section: 'Изменить раздел',
-        errorMessage: '',
-        successMessage: '',
-      },
-      {
-        _id: 'ChangeSlider',
-        section: 'Изменить слайдер',
         errorMessage: '',
         successMessage: '',
       },
