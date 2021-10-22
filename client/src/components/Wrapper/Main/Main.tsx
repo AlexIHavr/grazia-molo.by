@@ -93,7 +93,7 @@ const Main: React.FC = () => {
           <Route path="/Contacts" component={ContactsNavContent} exact />
 
           {/* изменяемые страницы сайта */}
-          {state.iSelectedItem >= 0
+          {state.navigations.length && state.iSelectedItem >= 0
             ? adminPanelReducer.state.mainNavigation
                 .filter(({ changeable }) => changeable)
                 .map(({ _id, withSubCategories }) => {
@@ -130,37 +130,38 @@ const Main: React.FC = () => {
           <Route path="/Contacts" component={ContactsContent} exact />
 
           {/* изменяемые страницы сайта */}
-          {adminPanelReducer.state.mainNavigation
-            .filter(({ changeable }) => changeable)
-            .map(({ _id, withSubCategories }) => {
-              return (
-                <Route
-                  key={_id}
-                  path={`/${_id === 'MainPage' ? '' : _id}/:subCategory?/:section?`}
-                  render={({ match }) => {
-                    const { subCategory, section } = match.params;
-                    return withSubCategories ? (
-                      subCategory !== undefined && section !== undefined ? (
-                        mainReducer.getSectionContent(section)
+          {state.navigations.length &&
+            adminPanelReducer.state.mainNavigation
+              .filter(({ changeable }) => changeable)
+              .map(({ _id, withSubCategories }) => {
+                return (
+                  <Route
+                    key={_id}
+                    path={`/${_id === 'MainPage' ? '' : _id}/:subCategory?/:section?`}
+                    render={({ match }) => {
+                      const { subCategory, section } = match.params;
+                      return withSubCategories ? (
+                        subCategory !== undefined && section !== undefined ? (
+                          mainReducer.getSectionContent(section)
+                        ) : (
+                          <div className="Description">
+                            {mainReducer.getCategoryNavigations(state.currentPage).length
+                              ? mainReducer
+                                  .getCategoryNavigations(state.currentPage)[0]
+                                  .startDescription.map((value) => {
+                                    return <div>{value}</div>;
+                                  })
+                              : ''}
+                          </div>
+                        )
                       ) : (
-                        <div className="Description">
-                          {mainReducer.getCategoryNavigations(state.currentPage).length
-                            ? mainReducer
-                                .getCategoryNavigations(state.currentPage)[0]
-                                .startDescription.map((value) => {
-                                  return <div>{value}</div>;
-                                })
-                            : ''}
-                        </div>
-                      )
-                    ) : (
-                      mainReducer.getSectionContent()
-                    );
-                  }}
-                  exact
-                />
-              );
-            })}
+                        mainReducer.getSectionContent()
+                      );
+                    }}
+                    exact
+                  />
+                );
+              })}
 
           {/* панель администратора */}
           {loginReducer.state.isAuth && loginReducer.state.userData.roles.includes('ADMIN') ? (
