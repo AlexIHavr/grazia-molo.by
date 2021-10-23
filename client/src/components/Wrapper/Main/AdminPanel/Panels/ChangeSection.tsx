@@ -27,9 +27,9 @@ const ChangeSection: React.FC = () => {
           <Select
             inputName="category"
             onSelect={adminPanelReducer.selectChangedCategory.bind(adminPanelReducer)}
-            options={state.mainNavigation
+            options={mainReducer.state.mainNavigations
               .filter(({ changeable }) => changeable)
-              .map(({ _id, name }) => ({ _id, name }))}
+              .map(({ category, name }) => ({ _id: category, name }))}
             defaultTitle="Выберите категорию"
           ></Select>
         </div>

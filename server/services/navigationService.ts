@@ -1,4 +1,5 @@
 import ApiError from '../errors/apiError';
+import mainNavigationModel from '../models/mainNavigationModel';
 import navigationModel from '../models/navigationModel';
 import {
   changeSectionRequestType,
@@ -27,6 +28,12 @@ class NavigationService {
       throw ApiError.BadRequest('Количество имен и ссылок видео не совпадают');
     }
 
+    const mainNavigation = await mainNavigationModel.findOne({ category });
+
+    if (mainNavigation && mainNavigation.withSubCategories && !subCategory) {
+      throw ApiError.BadRequest('Введите подкатегорию');
+    }
+
     const newSection = await navigationModel.create({
       category,
       subCategory: subCategory ?? '',
@@ -53,8 +60,13 @@ class NavigationService {
     return await navigationModel.find();
   }
 
+  async getMainNavigations() {
+    return await mainNavigationModel.find();
+  }
+
   async changeSection({
     sectionId,
+    category,
     subCategory,
     section,
     startDescription,
@@ -74,6 +86,12 @@ class NavigationService {
 
     if (videoNamesArr.length !== videoLinksArr.length) {
       throw ApiError.BadRequest('Количество имен и ссылок видео не совпадают');
+    }
+
+    const mainNavigation = await mainNavigationModel.findOne({ category });
+
+    if (mainNavigation && mainNavigation.withSubCategories && !subCategory) {
+      throw ApiError.BadRequest('Введите подкатегорию');
     }
 
     await oldSection.updateOne({

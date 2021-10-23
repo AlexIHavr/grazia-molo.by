@@ -36,6 +36,15 @@ class NavigationController {
     }
   }
 
+  async getMainNavigations(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = await navigationtService.getMainNavigations();
+      res.json(data);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async changeSection(
     req: Request<{}, {}, changeSectionRequestType>,
     res: Response,

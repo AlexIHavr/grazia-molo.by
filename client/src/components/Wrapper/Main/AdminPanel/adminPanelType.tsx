@@ -22,20 +22,12 @@ export type userResponseType = {
 
 export type usersResponseType = userResponseType[];
 
-export type mainNavigationType = {
-  _id: string;
-  name: string;
-  changeable: boolean;
-  withSubCategories: boolean;
-};
-
 export type sliderResponseType = {
   photoNames: string[];
 };
 
 export type adminPanelType = {
   panels: panelType[];
-  mainNavigation: mainNavigationType[];
   posts: postResponseType[];
   comments: commentType[];
   users: usersResponseType;

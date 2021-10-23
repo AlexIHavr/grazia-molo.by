@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { visitorApi } from '../../../api/api';
 import config from '../../../config/config';
 
-import { mainType, navigationResponseType } from './mainType';
+import { mainNavigationResponseType, mainType, navigationResponseType } from './mainType';
 
 class MainReducer {
   constructor() {
@@ -24,6 +24,7 @@ class MainReducer {
     iSelectedItem: 0,
     currentPage: window.location.href.split('/')[3] || 'MainPage',
     navigations: [],
+    mainNavigations: [],
     imagesUrl: process.env.PUBLIC_URL + '/Images/Wrapper/Main/',
     settings: {
       offsetNavScroll: 250, //смещение навигации при появление ее прокрутки (стрелок)
@@ -306,6 +307,18 @@ class MainReducer {
   //закрыть главное меню
   closeMainMenu() {
     this.state.activateMainMenu = false;
+  }
+
+  //получение главной навигации
+  async getMainNavigations() {
+    try {
+      const mainNavigations = await visitorApi.get<mainNavigationResponseType[]>(
+        '/getMainNavigations'
+      );
+      this.state.mainNavigations = mainNavigations.data;
+    } catch (e: any) {
+      console.log(e.response?.data || e);
+    }
   }
 
   //получение навигации

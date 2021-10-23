@@ -9,8 +9,8 @@ import mainReducer from '../../mainReducer';
 const CreateSection: React.FC = () => {
   const state = adminPanelReducer.state;
   const adminPanel = state.panels.find((adminPanel) => adminPanel._id === 'CreateSection');
-  const withSubCategory = adminPanelReducer.state.mainNavigation.find(
-    ({ _id }) => _id === state.selectedCategory
+  const withSubCategory = mainReducer.state.mainNavigations.find(
+    ({ category }) => category === state.selectedCategory
   )?.withSubCategories;
 
   return (
@@ -28,9 +28,9 @@ const CreateSection: React.FC = () => {
           <Select
             inputName="category"
             onSelect={adminPanelReducer.selectCategory.bind(adminPanelReducer)}
-            options={state.mainNavigation
+            options={mainReducer.state.mainNavigations
               .filter(({ changeable }) => changeable)
-              .map(({ _id, name }) => ({ _id, name }))}
+              .map(({ category, name }) => ({ _id: category, name }))}
             defaultTitle="Выберите категорию"
           ></Select>
         </div>
@@ -61,6 +61,7 @@ const CreateSection: React.FC = () => {
                     name="subCategory"
                     type="text"
                     placeholder="Введите имя подкатегории"
+                    required
                   />
                 </div>
               </>

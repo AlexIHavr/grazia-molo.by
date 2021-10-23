@@ -55,3 +55,10 @@ export type navigationModelType = {
 export type sliderModelType = {
   photoNames: string[];
 } & Document;
+
+export type mainNavigationModelType = {
+  category: string;
+  name: string;
+  changeable: boolean;
+  withSubCategories: boolean;
+} & Document;

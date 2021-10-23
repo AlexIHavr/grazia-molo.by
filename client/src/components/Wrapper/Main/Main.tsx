@@ -53,6 +53,9 @@ const Main: React.FC = () => {
     //получение навигации
     mainReducer.getNavigations();
 
+    //получение главной навигации
+    mainReducer.getMainNavigations();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -94,13 +97,13 @@ const Main: React.FC = () => {
 
           {/* изменяемые страницы сайта */}
           {state.navigations.length && state.iSelectedItem >= 0
-            ? adminPanelReducer.state.mainNavigation
+            ? mainReducer.state.mainNavigations
                 .filter(({ changeable }) => changeable)
-                .map(({ _id, withSubCategories }) => {
+                .map(({ category, withSubCategories }) => {
                   return (
                     <Route
-                      key={_id}
-                      path={`/${_id === 'MainPage' ? '' : _id}/:subCategory?/:section?`}
+                      key={category}
+                      path={`/${category === 'MainPage' ? '' : category}/:subCategory?/:section?`}
                       render={({ match }) => {
                         const { subCategory } = match.params;
                         return withSubCategories
@@ -131,13 +134,13 @@ const Main: React.FC = () => {
 
           {/* изменяемые страницы сайта */}
           {state.navigations.length &&
-            adminPanelReducer.state.mainNavigation
+            mainReducer.state.mainNavigations
               .filter(({ changeable }) => changeable)
-              .map(({ _id, withSubCategories }) => {
+              .map(({ category, withSubCategories }) => {
                 return (
                   <Route
-                    key={_id}
-                    path={`/${_id === 'MainPage' ? '' : _id}/:subCategory?/:section?`}
+                    key={category}
+                    path={`/${category === 'MainPage' ? '' : category}/:subCategory?/:section?`}
                     render={({ match }) => {
                       const { subCategory, section } = match.params;
                       return withSubCategories ? (

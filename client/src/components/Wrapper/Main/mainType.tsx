@@ -20,6 +20,14 @@ export type navigationResponseType = {
   videoLinks: string[];
 };
 
+export type mainNavigationResponseType = {
+  _id: string;
+  category: string;
+  name: string;
+  changeable: boolean;
+  withSubCategories: boolean;
+};
+
 export type mainType = {
   documentElem: HTMLElement;
   activateIMoveUpDocument: boolean;
@@ -33,6 +41,7 @@ export type mainType = {
   iSelectedItem: number;
   currentPage: string;
   navigations: navigationResponseType[];
+  mainNavigations: mainNavigationResponseType[];
   imagesUrl: string;
   settings: settingsType;
 };

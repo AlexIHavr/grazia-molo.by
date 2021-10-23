@@ -25,6 +25,7 @@ visitorRouter.post('/logout', userController.logout);
 visitorRouter.get('/activate/:link', userController.activate);
 visitorRouter.get('/refresh', userController.refresh);
 visitorRouter.get('/getLessons', timetableController.getLessons);
+visitorRouter.get('/getMainNavigations', navigationController.getMainNavigations);
 visitorRouter.get('/getNavigations', navigationController.getNavigations);
 visitorRouter.get('/getSliders', sliderController.getSliders);
 
