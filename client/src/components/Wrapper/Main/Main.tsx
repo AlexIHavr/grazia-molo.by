@@ -20,7 +20,6 @@ import mainReducer from './mainReducer';
 
 import './mainStyles.scss';
 import loginReducer from '../Windows/Login/loginReducer';
-import adminPanelReducer from './AdminPanel/adminPanelReducer';
 
 const Main: React.FC = () => {
   const state = mainReducer.state;
@@ -85,7 +84,13 @@ const Main: React.FC = () => {
           'NavContent ' +
           state.currentPage +
           (state.fixedNavMainPage ? ' fixedNavMainPage ' : '') +
-          (state.fixedNav ? ' fixedNav' : '')
+          (state.fixedNav ? ' fixedNav ' : '')
+        }
+        data-changeable={
+          state.mainNavigations.length
+            ? state.mainNavigations.find(({ category }) => category === state.currentPage)
+                .changeable
+            : ''
         }
         onScroll={() => mainReducer.activateNavContentScrollArrows(refNavContent)}
       >

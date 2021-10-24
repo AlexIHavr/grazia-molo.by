@@ -219,7 +219,7 @@ main {
         width: 100px !important;
       }
     }
-    .NavContent:not(.Events) {
+    .NavContent:not([data-changeable='true']) {
       flex-direction: row;
     }
     .Content {
