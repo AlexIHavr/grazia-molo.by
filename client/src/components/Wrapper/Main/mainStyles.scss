@@ -212,14 +212,8 @@ main {
         width: 150px !important;
         padding: 10px;
       }
-      .YearsEvents {
-        width: 250px !important;
-      }
-      &.History > * {
-        width: 100px !important;
-      }
     }
-    .NavContent:not([data-changeable='true']) {
+    .NavContent:not([data-withSubCategories='true']) {
       flex-direction: row;
     }
     .Content {

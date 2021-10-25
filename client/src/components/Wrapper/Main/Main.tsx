@@ -86,11 +86,9 @@ const Main: React.FC = () => {
           (state.fixedNavMainPage ? ' fixedNavMainPage ' : '') +
           (state.fixedNav ? ' fixedNav ' : '')
         }
-        data-changeable={
-          state.mainNavigations.length
-            ? state.mainNavigations.find(({ category }) => category === state.currentPage)
-                .changeable
-            : ''
+        data-withSubCategories={
+          state.mainNavigations.find(({ category }) => category === state.currentPage)
+            ?.withSubCategories
         }
         onScroll={() => mainReducer.activateNavContentScrollArrows(refNavContent)}
       >

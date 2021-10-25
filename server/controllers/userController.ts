@@ -10,6 +10,7 @@ import {
   userSettingsRequestType,
 } from '../types/servicesTypes';
 import fileService from '../services/fileService';
+import mainNavigationModel from '../models/mainNavigationModel';
 
 class UserController {
   async registration(
