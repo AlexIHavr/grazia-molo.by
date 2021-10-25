@@ -110,11 +110,11 @@ class MainReducer {
 
     switch (direction) {
       case 'Up':
-        navContent.scrollTo(0, 0);
+        navContent.scrollTo({ top: 0, behavior: 'smooth' });
         break;
 
       case 'Down':
-        navContent.scrollTo(0, navContent.scrollHeight);
+        navContent.scrollTo({ left: 0, top: navContent.scrollHeight, behavior: 'smooth' });
         break;
 
       case 'WithContent':
@@ -131,11 +131,6 @@ class MainReducer {
         }
         break;
     }
-  }
-
-  //перемещение контента вверх (при небольших экранах)
-  scrollDocumentToUp() {
-    window.scrollTo(0, 0);
   }
 
   //получение навигации контента разделов без покатегорий

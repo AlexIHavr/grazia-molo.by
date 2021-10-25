@@ -65,7 +65,7 @@ const Main: React.FC = () => {
           'fas fa-arrow-circle-up MoveUpDocument' +
           (state.activateIMoveUpDocument ? ' openElement' : '')
         }
-        onClick={() => mainReducer.scrollDocumentToUp()}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       ></i>
       <i
         className={'fas fa-arrow-circle-up MoveUp' + (state.activateIMoveUp ? ' openElement' : '')}
