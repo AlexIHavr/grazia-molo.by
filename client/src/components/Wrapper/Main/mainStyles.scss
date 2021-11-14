@@ -208,12 +208,14 @@ main {
       justify-content: space-around;
       flex-wrap: wrap;
       position: static !important;
-      & > * {
+      & > *:not(.Sections) {
+        width: 200px !important;
+      }
+      .Sections {
         width: 150px !important;
-        padding: 10px;
       }
     }
-    .NavContent:not([data-withSubCategories='true']) {
+    .NavContent:not([data-withsubcategories='true']) {
       flex-direction: row;
     }
     .Content {

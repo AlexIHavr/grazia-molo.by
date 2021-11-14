@@ -39,7 +39,7 @@ const Main: React.FC = () => {
       }
 
       if (window.innerWidth < state.settings.adaptiveWidth1) {
-        mainReducer.toogleIMoveUpDocumentOnScroll();
+        mainReducer.toggleIMoveUpDocumentOnScroll();
       } else if (state.currentPage === 'MainPage') {
         //фиксирование навигации главной страницы после слайдера
         mainReducer.fixedNavMainPageOnScroll();
@@ -86,7 +86,7 @@ const Main: React.FC = () => {
           (state.fixedNavMainPage ? ' fixedNavMainPage ' : '') +
           (state.fixedNav ? ' fixedNav ' : '')
         }
-        data-withSubCategories={
+        data-withsubcategories={
           state.mainNavigations.find(({ category }) => category === state.currentPage)
             ?.withSubCategories
         }

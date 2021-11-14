@@ -3,8 +3,7 @@
 .Content.Contacts {
   $locationColor: #8183fc;
 
-  .LocationLink,
-  .AdminLink {
+  a {
     @extend .activeI;
   }
 
@@ -50,7 +49,9 @@
 }
 
 @media (max-width: $adaptiveWidth2) {
-  .Content.Contacts .Map iframe {
-    width: 100%;
+  .Content.Contacts {
+    .Map iframe {
+      width: 100%;
+    }
   }
 }

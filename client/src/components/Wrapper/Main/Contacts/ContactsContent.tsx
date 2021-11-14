@@ -8,12 +8,7 @@ const ContactsContent: React.FC = () => {
     <>
       <div className="Description">
         <div className="Admin">
-          <a
-            className="AdminLink"
-            href="https://vk.com/id39527276"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://vk.com/id39527276" target="_blank" rel="noreferrer">
             <i className="fas fa-user-tie"></i>
             <span>Руководитель - Хавронин Дмитрий Алексеевич</span>
           </a>
@@ -21,7 +16,6 @@ const ContactsContent: React.FC = () => {
         <MainContacts />
         <div className="Location">
           <a
-            className="LocationLink"
             href="https://yandex.by/maps/org/gimnaziya_10/1114837153/?ll=26.843271%2C54.301563&z=17"
             target="_blank"
             rel="noreferrer"

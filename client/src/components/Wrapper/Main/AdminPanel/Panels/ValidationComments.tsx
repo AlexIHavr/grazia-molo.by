@@ -36,7 +36,7 @@ const ValidationComments: React.FC = () => {
                   <div>{comment.date}</div>
                   <div
                     className="IsValidatedComment"
-                    onClick={() => adminPanelReducer.toogleIsValidatedComment(comment)}
+                    onClick={() => adminPanelReducer.toggleIsValidatedComment(comment)}
                   >
                     {comment.isValidated ? (
                       <i className="fas fa-check"></i>
@@ -57,7 +57,7 @@ const ValidationComments: React.FC = () => {
         {state.comments.length ? (
           <button
             className="IsValidatedAllComment button"
-            onClick={(e) => adminPanelReducer.toogleIsValidatedComments(e)}
+            onClick={(e) => adminPanelReducer.toggleIsValidatedComments(e)}
           >
             {state.isValidatedAll ? (
               <>

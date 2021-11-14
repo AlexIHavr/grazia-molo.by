@@ -182,12 +182,12 @@ class AdminPanelReducer {
   }
 
   //изменить валидацию комментария
-  toogleIsValidatedComment(comment: commentType) {
+  toggleIsValidatedComment(comment: commentType) {
     comment.isValidated = !comment.isValidated;
   }
 
   //изменить валидацию всех комментариев
-  toogleIsValidatedComments(e: React.MouseEvent<HTMLButtonElement>) {
+  toggleIsValidatedComments(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     this.state.isValidatedAll = !this.state.isValidatedAll;
@@ -227,7 +227,7 @@ class AdminPanelReducer {
   }
 
   //изменить бан пользователя
-  toogleIsBanUser(user: userResponseType) {
+  toggleIsBanUser(user: userResponseType) {
     user.isBan = !user.isBan;
   }
 

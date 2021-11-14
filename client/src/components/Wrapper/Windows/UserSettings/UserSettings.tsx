@@ -60,7 +60,7 @@ const UserSettings: React.FC = () => {
             className={userSettingsReducer.state.zoomInPhoto ? 'zoomInPhoto' : ''}
             src={forumReducer.state.userImgUrl + loginReducer.state.userData.photoName}
             alt="Картинка не загрузилась"
-            onClick={() => userSettingsReducer.toogleZoomPhoto()}
+            onClick={() => userSettingsReducer.toggleZoomPhoto()}
           />
         </UserPhoto>
         <FileInputContainer

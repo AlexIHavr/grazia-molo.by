@@ -86,7 +86,7 @@ class MainReducer {
   }
 
   //изменить показ стрелки перемещение вверх контента
-  toogleIMoveUpDocumentOnScroll() {
+  toggleIMoveUpDocumentOnScroll() {
     this.state.activateIMoveUpDocument =
       this.state.refContent.current.getBoundingClientRect().y < 0;
   }
@@ -295,7 +295,7 @@ class MainReducer {
   }
 
   //изменить показ главное меню при клике на бар
-  toogleActivateMainMenu() {
+  toggleActivateMainMenu() {
     this.state.activateMainMenu = !this.state.activateMainMenu;
   }
 

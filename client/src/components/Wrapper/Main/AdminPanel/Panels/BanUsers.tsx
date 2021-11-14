@@ -37,7 +37,7 @@ const BanUsers: React.FC = () => {
                   <div>{user.date}</div>
                   <div
                     className="IsValidatedComment"
-                    onClick={() => adminPanelReducer.toogleIsBanUser(user)}
+                    onClick={() => adminPanelReducer.toggleIsBanUser(user)}
                   >
                     {user.isBan ? <i className="fas fa-ban"></i> : <i className="fas fa-user"></i>}
                   </div>

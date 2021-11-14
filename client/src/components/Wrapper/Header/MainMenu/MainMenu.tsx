@@ -13,7 +13,7 @@ const MainMenu: React.FC = () => {
         className={
           'BarsMainMenu ' + (mainReducer.state.activateMainMenu ? 'rotateBarsMainMenu' : '')
         }
-        onClick={() => mainReducer.toogleActivateMainMenu()}
+        onClick={() => mainReducer.toggleActivateMainMenu()}
       >
         <i className={'fas fa-chevron-circle-down'}></i>
       </div>

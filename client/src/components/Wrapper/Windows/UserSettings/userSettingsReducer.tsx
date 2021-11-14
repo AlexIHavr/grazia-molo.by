@@ -16,7 +16,7 @@ class UserSettingsReducer {
     zoomInPhoto: false,
   };
 
-  toogleZoomPhoto() {
+  toggleZoomPhoto() {
     this.state.zoomInPhoto = !this.state.zoomInPhoto;
   }
 
