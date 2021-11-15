@@ -202,7 +202,7 @@ class MainReducer {
         ({ _id, subCategory, section, description, photoNames, videoNames, videoLinks }) => {
           return (
             <div key={_id} data-selected={_id}>
-              <h3>{section}</h3>
+              <h3>{(subCategory ? `${subCategory} - ` : '') + section}</h3>
 
               <div className="Description">
                 {description.map((text) => (
