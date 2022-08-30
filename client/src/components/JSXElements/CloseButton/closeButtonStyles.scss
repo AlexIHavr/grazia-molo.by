@@ -1,0 +1,56 @@
+@import '/src/globalStyles';
+
+.CloseButton {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  box-shadow: 0px 0px 5px #2f0000;
+  border: 2px solid #2f0000;
+  background-color: red;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+
+  i {
+    color: #2f0000;
+    transition: color 0.1s;
+    -webkit-transition: color 0.1s;
+    -moz-transition: color 0.1s;
+    -ms-transition: color 0.1s;
+    -o-transition: color 0.1s;
+  }
+
+  &:hover {
+    i {
+      color: red;
+    }
+    border: 2px solid red;
+    background-color: #2f0000;
+  }
+  &:active {
+    box-shadow: none;
+  }
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  -o-transition: all 0.1s;
+}
+
+@media (max-width: $adaptiveWidth3) {
+  .CloseButton {
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    font-size: 1.3rem;
+  }
+}

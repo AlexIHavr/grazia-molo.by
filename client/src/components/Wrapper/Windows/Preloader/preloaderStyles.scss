@@ -1,0 +1,23 @@
+.Preloader {
+  $preloaderSize: 80px;
+  display: none;
+  opacity: 0.9;
+  position: fixed;
+  top: calc(50vh - #{$preloaderSize} / 2);
+  left: calc(50vw - #{$preloaderSize} / 2);
+  font-size: 5rem;
+  text-shadow: 0 0 5px #00edff;
+  z-index: 100;
+  animation: animateLoader 1.5s linear infinite;
+  -webkit-animation: animateLoader 1.5s linear infinite;
+}
+
+@keyframes animateLoader {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

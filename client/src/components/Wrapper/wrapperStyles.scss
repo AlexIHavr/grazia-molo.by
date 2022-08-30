@@ -1,0 +1,319 @@
+@import '/src/globalStyles';
+
+@font-face {
+  font-family: 'Lora';
+  src: url('../../fonts/Lora-Regular.ttf');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Lora, Arial;
+  min-width: 300px;
+
+  a {
+    text-decoration: none;
+    color: $baseTextColor;
+  }
+
+  i {
+    color: $baseTextColor;
+  }
+
+  button {
+    font-family: Lora, Arial;
+  }
+
+  form {
+    input,
+    .Select,
+    .SelectOptions > div {
+      border: 2px solid $baseTextColor;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      outline: none;
+      background: #ffffff !important;
+      padding: 5px;
+      font-size: 1.2rem;
+      color: $baseTextColor;
+      &:focus {
+        border: 2px solid $activeColor;
+      }
+      transition: border 0.1s;
+      -webkit-transition: border 0.1s;
+      -moz-transition: border 0.1s;
+      -ms-transition: border 0.1s;
+      -o-transition: border 0.1s;
+    }
+    input[type='file'] {
+      display: none;
+    }
+    button[type='submit'] {
+      margin: 20px auto 0 auto;
+      font-size: 1.3rem;
+    }
+    textarea {
+      resize: none;
+    }
+    textarea {
+      font-size: 1.1rem;
+      font-weight: bold;
+      font-family: Lora, Arial;
+      padding: 10px;
+      outline: none;
+      -moz-appearance: none;
+      border: 2px solid $baseTextColor;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+    }
+  }
+}
+
+.Wrapper {
+  background-image: url('./WrapperBackground.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  & > *:not(.Windows) {
+    padding: 10px;
+  }
+}
+
+.button {
+  padding: 10px 20px;
+  box-shadow: 0px 0px 5px $baseTextColor;
+  border: 2px solid $baseTextColor;
+  color: $baseTextColor;
+  background-color: $buttonColor;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  &:hover {
+    color: $activeColor;
+    border: 2px solid $activeColor;
+    animation-play-state: paused;
+    i {
+      color: $activeColor;
+      transition: all 0.1s;
+    }
+  }
+  &:active {
+    box-shadow: none;
+  }
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  -o-transition: all 0.1s;
+}
+
+.deleteButton {
+  width: fit-content;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 0px 0px 5px #2f0000;
+  border: 2px solid #2f0000;
+  background-color: red;
+  color: #2f0000;
+  font-weight: bold;
+
+  i {
+    font-size: 1.3rem !important;
+    color: #2f0000;
+    transition: color 0.1s;
+    -webkit-transition: color 0.1s;
+    -moz-transition: color 0.1s;
+    -ms-transition: color 0.1s;
+    -o-transition: color 0.1s;
+  }
+
+  &:hover {
+    i {
+      color: red;
+    }
+    color: red;
+    border: 2px solid red;
+    background-color: #2f0000;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  -o-transition: all 0.1s;
+}
+
+.closeElement {
+  display: none !important;
+}
+
+.openElement {
+  display: block !important;
+}
+
+.openElementFlex {
+  display: flex !important;
+}
+
+.Errors,
+.Successes {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.4rem !important;
+}
+
+.Errors {
+  color: red;
+}
+
+.Successes {
+  color: green;
+}
+
+.zoomInPhoto {
+  z-index: 3;
+  cursor: zoom-out !important;
+  transform: scale(5);
+  -webkit-transform: scale(5);
+  -moz-transform: scale(5);
+  -ms-transform: scale(5);
+  -o-transform: scale(5);
+}
+
+::-webkit-scrollbar-track {
+  background-color: $baseTextColor;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9dffff;
+  background-image: url('./Scroll.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+input[type='number']:hover,
+input[type='number']:focus {
+  -moz-appearance: number-input;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: $adaptiveWidth1) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: $adaptiveWidth2) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: $adaptiveWidth2) {
+  .zoomInPhoto {
+    transform: scale(4);
+    -webkit-transform: scale(4);
+    -moz-transform: scale(4);
+    -ms-transform: scale(4);
+    -o-transform: scale(4);
+  }
+}
+
+@media (max-width: $adaptiveWidth3) {
+  .Wrapper {
+    background-size: 500% 100%;
+  }
+  .window h1 {
+    font-size: 22px;
+  }
+  .zoomInPhoto {
+    transform: scale(3.5);
+    -webkit-transform: scale(3.5);
+    -moz-transform: scale(3.5);
+    -ms-transform: scale(3.5);
+    -o-transform: scale(3.5);
+  }
+}
+
+@media (max-width: $adaptiveWidth4) {
+  .window h1 {
+    font-size: 20px;
+  }
+  .zoomInPhoto {
+    transform: scale(3);
+    -webkit-transform: scale(3);
+    -moz-transform: scale(3);
+    -ms-transform: scale(3);
+    -o-transform: scale(3);
+  }
+}

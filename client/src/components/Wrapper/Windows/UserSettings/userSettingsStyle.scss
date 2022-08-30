@@ -1,0 +1,30 @@
+@import '/src/globalStyles';
+
+.GoToAdminPanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 20px;
+  padding: 0 !important;
+  width: 40px;
+  height: 40px;
+  i {
+    font-size: 1.5rem;
+  }
+
+  &.active {
+    box-shadow: none;
+    color: $activeColor;
+    border: 2px solid $activeColor;
+    i {
+      color: $activeColor;
+    }
+  }
+}
+
+.LogoutButton {
+  width: fit-content;
+  margin: 20px auto 0 auto;
+  font-size: 1.3rem !important;
+}

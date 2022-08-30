@@ -1,0 +1,30 @@
+@import '/src/globalStyles';
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  background-color: $backgroundColor;
+
+  img {
+    width: 70px;
+  }
+}
+
+@media (max-width: $adaptiveWidth3) {
+  footer {
+    .MainContacts > div {
+      width: 250px;
+    }
+    img {
+      width: 50px;
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth4) {
+  footer img {
+    display: none;
+  }
+}

@@ -1,0 +1,54 @@
+@import '/src/globalStyles';
+
+.TimetableContent {
+  text-align: center;
+
+  h2 {
+    margin: 0 0 20px 0;
+  }
+
+  .Timetable {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 0 auto;
+
+    h3,
+    & > div > div {
+      width: 150px;
+      margin: 10px;
+      padding: 5px 0;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      border: 2px solid $baseBorderColor;
+      background-color: #e4f4ff;
+      color: #072f56;
+      font-weight: bold;
+    }
+    h3 {
+      box-shadow: 0px 0px 5px $baseTextColor;
+      background-color: $buttonColor;
+    }
+    .TimeLesson {
+      font-size: 1.2rem;
+      border-bottom: 2px solid $baseBorderColor;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media (max-width: $adaptiveWidth1) {
+  .TimetableContent .Timetable {
+    flex-wrap: wrap;
+    width: 80%;
+  }
+}
+
+@media (max-width: $adaptiveWidth2) {
+  .TimetableContent .Timetable {
+    width: 100%;
+  }
+}

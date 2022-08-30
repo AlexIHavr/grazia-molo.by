@@ -1,0 +1,66 @@
+@import '/src/globalStyles';
+
+i.fa-user-circle {
+  text-shadow: 0 0 5px $buttonColor;
+
+  .UserSettings & {
+    width: auto;
+    padding: 10px;
+    font-size: 5rem;
+  }
+
+  .IconUser & {
+    font-size: 3rem;
+  }
+  .PostIconUser & {
+    font-size: 2rem;
+  }
+}
+
+.UserPhoto {
+  display: flex;
+  justify-content: center;
+
+  .PostIconUser & {
+    position: absolute;
+    top: 0;
+  }
+
+  img {
+    .IconUser & {
+      height: 50px;
+    }
+    .PostIconUser & {
+      cursor: zoom-in;
+      height: 25px;
+    }
+
+    .UserSettings & {
+      cursor: zoom-in;
+      padding: 10px;
+      height: 100px;
+    }
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    box-shadow: none !important;
+    filter: drop-shadow(0 0 2px $baseTextColor);
+    -webkit-filter: drop-shadow(0 0 2px $baseTextColor);
+
+    transition: transform 0.1s;
+    -webkit-transition: transform 0.1s;
+    -moz-transition: transform 0.1s;
+    -ms-transition: transform 0.1s;
+    -o-transition: transform 0.1s;
+
+    .Forum & {
+      transition: none;
+      -webkit-transition: none;
+      -moz-transition: none;
+      -ms-transition: none;
+      -o-transition: none;
+    }
+  }
+}

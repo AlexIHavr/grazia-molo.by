@@ -1,0 +1,107 @@
+@import '/src/globalStyles';
+
+.Select {
+  position: relative;
+  cursor: pointer;
+  border: none !important;
+  box-shadow: 0 0 5px $activeColor;
+
+  .SelectOptions {
+    position: absolute;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    left: 0;
+    top: 100%;
+    z-index: 1;
+    & > div {
+      border: 2px solid $baseTextColor !important;
+      border-bottom: none !important;
+      z-index: 3;
+      border-radius: 0 !important;
+      -webkit-border-radius: 0 !important;
+      -moz-border-radius: 0 !important;
+      -ms-border-radius: 0 !important;
+      -o-border-radius: 0 !important;
+
+      &:hover {
+        background-color: $backgroundColor !important;
+      }
+      transition: 0.1s;
+      -webkit-transition: 0.1s;
+      -moz-transition: 0.1s;
+      -ms-transition: 0.1s;
+      -o-transition: 0.1s;
+    }
+
+    :first-child {
+      border-radius: 5px 5px 0 0 !important;
+      -webkit-border-radius: 5px 5px 0 0 !important;
+      -moz-border-radius: 5px 5px 0 0 !important;
+      -ms-border-radius: 5px 5px 0 0 !important;
+      -o-border-radius: 5px 5px 0 0 !important;
+    }
+
+    :last-child {
+      border-bottom: 2px solid $baseTextColor !important;
+      border-radius: 0 0 5px 5px !important;
+      -webkit-border-radius: 0 0 5px 5px !important;
+      -moz-border-radius: 0 0 5px 5px !important;
+      -ms-border-radius: 0 0 5px 5px !important;
+      -o-border-radius: 0 0 5px 5px !important;
+    }
+  }
+
+  .SelectValue {
+    position: relative;
+    div {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    i {
+      font-size: 1.5rem;
+      position: absolute;
+      right: 0;
+      top: 2px;
+      transition: transform 0.1s;
+      -webkit-transition: transform 0.1s;
+      -moz-transition: transform 0.1s;
+      -ms-transition: transform 0.1s;
+      -o-transition: transform 0.1s;
+    }
+  }
+  transition: 0.1s !important;
+  -webkit-transition: 0.1s !important;
+  -moz-transition: 0.1s !important;
+  -ms-transition: 0.1s !important;
+  -o-transition: 0.1s !important;
+}
+
+.showSelectOptions {
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  transition: max-height 0.1s ease-in;
+  -webkit-transition: max-height 0.1s ease-in;
+  -moz-transition: max-height 0.1s ease-in;
+  -ms-transition: max-height 0.1s ease-in;
+  -o-transition: max-height 0.1s ease-in;
+}
+
+.clickedSelect {
+  box-shadow: 0 0 1px $activeColor;
+}
+
+.rotateSelectArrow {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
+.cancelAbsoluteOptions {
+  position: static !important;
+}

@@ -1,0 +1,57 @@
+@import '/src/globalStyles';
+
+.Content.Contacts {
+  $locationColor: #8183fc;
+
+  a {
+    @extend .activeI;
+  }
+
+  .Description {
+    text-indent: 10px;
+  }
+  .MainContacts {
+    border-bottom: 2px solid $locationColor;
+    div {
+      line-height: 50px;
+    }
+  }
+  .Location {
+    margin-top: 20px;
+  }
+  .Map {
+    margin: 20px;
+    iframe {
+      width: 600px;
+      height: 300px;
+      border: 2px solid $locationColor;
+      box-shadow: 0px 0px 3px $locationColor;
+      border-radius: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+    }
+  }
+
+  & > * {
+    font-size: 1.2rem;
+  }
+  span {
+    font-size: 1.2rem;
+    padding: 10px;
+    font-weight: bold;
+  }
+  i {
+    font-size: 1.7rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: $adaptiveWidth2) {
+  .Content.Contacts {
+    .Map iframe {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@import '/src/globalStyles';
+
+.MainContacts {
+  display: flex;
+
+  footer & {
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    & > div {
+      padding: 10px;
+      width: 270px;
+    }
+  }
+
+  .Content & {
+    flex-direction: column;
+  }
+
+  & > * {
+    font-size: 1.1rem;
+  }
+  span {
+    font-size: 1.1rem;
+    padding: 5px;
+    font-weight: bold;
+  }
+  i {
+    font-size: 1.5rem;
+    padding: 5px;
+  }
+  a {
+    @extend .activeI;
+  }
+}
